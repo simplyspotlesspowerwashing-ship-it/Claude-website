@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="Placeholder: before cleaning">
+  <defs>
+    <linearGradient id="skyB" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7c8a92"/><stop offset="1" stop-color="#aab2ac"/>
+    </linearGradient>
+    <linearGradient id="wallB" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#b9bcae"/><stop offset="1" stop-color="#8e9683"/>
+    </linearGradient>
+    <linearGradient id="grimeB" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4c5b3a" stop-opacity=".62"/>
+      <stop offset="1" stop-color="#3d4a2e" stop-opacity=".08"/>
+    </linearGradient>
+    <filter id="blurB"><feGaussianBlur stdDeviation="9"/></filter>
+  </defs>
+
+  <rect width="800" height="600" fill="url(#skyB)"/>
+  <path d="M0 470h800v130H0z" fill="#7d7c70"/>
+  <path d="M120 470 210 250h380l90 220z" fill="#6c7360"/>
+  <path d="M150 470V250h500v220z" fill="url(#wallB)"/>
+
+  <g stroke="#7e866f" stroke-width="3" opacity=".55">
+    <path d="M150 290h500M150 320h500M150 350h500M150 380h500M150 410h500M150 440h500"/>
+  </g>
+
+  <path d="M100 240 400 120l300 120z" fill="#5c5f55"/>
+  <path d="M100 240 400 120l300 120z" fill="#3f4a34" opacity=".45"/>
+
+  <g fill="url(#grimeB)" filter="url(#blurB)">
+    <path d="M150 250h90v220h-90zM300 250h60v190h-60zM470 250h110v220H470z"/>
+  </g>
+  <g fill="#46562f" opacity=".38" filter="url(#blurB)">
+    <ellipse cx="200" cy="430" rx="70" ry="55"/>
+    <ellipse cx="560" cy="415" rx="90" ry="65"/>
+    <ellipse cx="380" cy="455" rx="60" ry="35"/>
+  </g>
+
+  <rect x="240" y="315" width="90" height="80" fill="#5f6b6e" opacity=".85"/>
+  <rect x="470" y="315" width="90" height="80" fill="#5f6b6e" opacity=".85"/>
+  <rect x="365" y="360" width="70" height="110" fill="#6b5f4e"/>
+
+  <g fill="#3f4a30" opacity=".3">
+    <path d="M0 470h800v18H0z"/>
+  </g>
+  <text x="400" y="556" font-family="system-ui,sans-serif" font-size="21" font-weight="600"
+        fill="#ffffff" fill-opacity=".7" text-anchor="middle" letter-spacing="3">BEFORE — ADD YOUR PHOTO</text>
+</svg>

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="Placeholder: after cleaning">
+  <defs>
+    <linearGradient id="skyA" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5fb5e8"/><stop offset="1" stop-color="#cfe9f8"/>
+    </linearGradient>
+    <linearGradient id="wallA" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#e6edf3"/>
+    </linearGradient>
+    <linearGradient id="shineA" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity=".85"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="600" fill="url(#skyA)"/>
+  <circle cx="655" cy="105" r="52" fill="#fff" opacity=".55"/>
+  <path d="M0 470h800v130H0z" fill="#d8dee2"/>
+  <path d="M120 470 210 250h380l90 220z" fill="#c3ccd2"/>
+  <path d="M150 470V250h500v220z" fill="url(#wallA)"/>
+
+  <g stroke="#d4dee6" stroke-width="3">
+    <path d="M150 290h500M150 320h500M150 350h500M150 380h500M150 410h500M150 440h500"/>
+  </g>
+
+  <path d="M100 240 400 120l300 120z" fill="#4a6a86"/>
+  <path d="M100 240 400 120l300 120z" fill="url(#shineA)" opacity=".5"/>
+
+  <rect x="240" y="315" width="90" height="80" fill="#9fd4ef"/>
+  <rect x="470" y="315" width="90" height="80" fill="#9fd4ef"/>
+  <path d="M240 395 330 315v80z" fill="#fff" opacity=".45"/>
+  <path d="M470 395 560 315v80z" fill="#fff" opacity=".45"/>
+  <rect x="365" y="360" width="70" height="110" fill="#33608a"/>
+
+  <g fill="#ffffff" opacity=".5">
+    <path d="M0 470h800v10H0z"/>
+  </g>
+  <g fill="#7fd4f5" opacity=".9">
+    <circle cx="120" cy="520" r="6"/><circle cx="150" cy="540" r="4"/><circle cx="95" cy="548" r="3"/>
+  </g>
+  <text x="400" y="556" font-family="system-ui,sans-serif" font-size="21" font-weight="600"
+        fill="#0b2e54" fill-opacity=".55" text-anchor="middle" letter-spacing="3">AFTER — ADD YOUR PHOTO</text>
+</svg>

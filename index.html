@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Simply Spotless Pressure Wash | Exterior Cleaning Done Right</title>
+<meta name="description" content="Simply Spotless Pressure Wash — professional house washing, roof soft washing, driveway and deck cleaning. See the before and after for yourself.">
+<meta name="theme-color" content="#07203c">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Simply Spotless Pressure Wash">
+<meta property="og:description" content="Exterior cleaning that makes your property look brand new. See the before and after.">
+<meta property="og:image" content="assets/img/hero.jpg">
+
+<link rel="icon" href="assets/placeholders/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ══════════════════════════ LOADER ══════════════════════════ -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader__inner">
+    <svg class="loader__drop" viewBox="0 0 64 84" aria-hidden="true">
+      <defs>
+        <clipPath id="dropClip">
+          <path d="M32 2C32 2 4 34 4 52a28 28 0 1 0 56 0C60 34 32 2 32 2Z"/>
+        </clipPath>
+      </defs>
+      <path class="loader__dropOutline" d="M32 2C32 2 4 34 4 52a28 28 0 1 0 56 0C60 34 32 2 32 2Z"/>
+      <g clip-path="url(#dropClip)">
+        <rect class="loader__fill" x="0" y="0" width="64" height="84"/>
+      </g>
+    </svg>
+    <div class="loader__word">
+      <span>SIMPLY</span><span>SPOTLESS</span>
+    </div>
+    <div class="loader__bar"><i></i></div>
+  </div>
+</div>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ══════════════════════════ HEADER ══════════════════════════ -->
+<header class="hdr" id="hdr">
+  <div class="hdr__bar wrap">
+    <a class="brand" href="#top" aria-label="Simply Spotless Pressure Wash — home">
+      <svg class="brand__mark" viewBox="0 0 48 48" aria-hidden="true">
+        <path d="M24 3S6 24 6 35a18 18 0 0 0 36 0C42 24 24 3 24 3Z"/>
+        <path class="brand__shine" d="M17 33c0-6 5-12 5-12s-1 8 2 11 6 3 6 3-3 5-8 4-5-4-5-6Z"/>
+      </svg>
+      <span class="brand__txt">
+        <strong>Simply Spotless</strong>
+        <em>Pressure Wash</em>
+      </span>
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Primary">
+      <ul>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#results">Before &amp; After</a></li>
+        <li><a href="#why">Why Us</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+      <a class="btn btn--gold nav__call" href="tel:+15551234567" data-site-tel>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1Z"/></svg>
+        <span data-site="phone">(555) 123-4567</span>
+      </a>
+    </nav>
+
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="nav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="hdr__progress"><i id="scrollbar"></i></div>
+</header>
+
+<main id="main">
+
+<!-- ══════════════════════════ HERO ══════════════════════════ -->
+<section class="hero" id="top">
+  <div class="hero__media">
+    <img src="assets/img/hero.jpg" alt="" data-fallback="assets/placeholders/hero.svg" id="heroImg">
+  </div>
+  <div class="hero__veil"></div>
+
+  <div class="wrap hero__inner">
+    <p class="hero__badge reveal">
+      <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+      Locally owned &amp; fully insured
+    </p>
+
+    <h1 class="hero__title">
+      <span class="line"><span>Your&nbsp;home,</span></span>
+      <span class="line"><span class="grad">simply&nbsp;spotless.</span></span>
+    </h1>
+
+    <p class="hero__sub reveal" data-delay="1">
+      Soft washing, pressure washing and exterior restoration that takes years off
+      your property in a single afternoon. No harsh scrubbing, no damage — just
+      results you can see from the street.
+    </p>
+
+    <div class="hero__cta reveal" data-delay="2">
+      <a class="btn btn--gold btn--lg" href="tel:+15551234567" data-site-tel>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1Z"/></svg>
+        Call <span data-site="phone">(555) 123-4567</span>
+      </a>
+      <a class="btn btn--ghost btn--lg" href="#results">See the transformations</a>
+    </div>
+
+    <ul class="hero__trust reveal" data-delay="3">
+      <li><b data-count="500" data-suffix="+">0</b><span>Homes cleaned</span></li>
+      <li><b data-count="5" data-suffix="★">0</b><span>Average rating</span></li>
+      <li><b data-count="100" data-suffix="%">0</b><span>Satisfaction promise</span></li>
+      <li><b>Free</b><span>On-site estimates</span></li>
+    </ul>
+  </div>
+
+  <a class="hero__scroll" href="#services" aria-label="Scroll to services">
+    <span></span>
+  </a>
+</section>
+
+<!-- ══════════════════════════ MARQUEE ══════════════════════════ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    <span>House Washing</span><i>◆</i><span>Roof Soft Wash</span><i>◆</i><span>Driveways</span><i>◆</i>
+    <span>Decks &amp; Fences</span><i>◆</i><span>Gutter Brightening</span><i>◆</i><span>Paver Sealing</span><i>◆</i>
+    <span>Patios</span><i>◆</i><span>Storefronts</span><i>◆</i>
+    <span>House Washing</span><i>◆</i><span>Roof Soft Wash</span><i>◆</i><span>Driveways</span><i>◆</i>
+    <span>Decks &amp; Fences</span><i>◆</i><span>Gutter Brightening</span><i>◆</i><span>Paver Sealing</span><i>◆</i>
+    <span>Patios</span><i>◆</i><span>Storefronts</span><i>◆</i>
+  </div>
+</div>
+
+<!-- ══════════════════════════ SERVICES ══════════════════════════ -->
+<section class="sec services" id="services">
+  <div class="wrap">
+    <header class="sechead reveal">
+      <p class="eyebrow">What we clean</p>
+      <h2>One crew for every <span class="grad">exterior surface</span></h2>
+      <p class="lede">Every surface gets the right pressure and the right detergent — vinyl and
+        shingles get a gentle soft wash, concrete gets the deep clean it deserves.</p>
+    </header>
+
+    <div class="grid grid--svc" id="svcGrid"><!-- rendered by main.js --></div>
+
+    <p class="sec__foot reveal">Don't see your surface? <a href="tel:+15551234567" data-site-tel>Give us a call</a> — we've probably cleaned it.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════ BEFORE / AFTER ══════════════════════════ -->
+<section class="sec results" id="results">
+  <div class="wrap">
+    <header class="sechead reveal">
+      <p class="eyebrow">Real jobs, real results</p>
+      <h2>Drag the slider. <span class="grad">Watch it disappear.</span></h2>
+      <p class="lede">No filters, no staging — these are straight off the truck. Grab the handle
+        and pull it across to see the difference.</p>
+    </header>
+
+    <div class="grid grid--ba" id="baGrid"><!-- rendered by main.js --></div>
+
+    <div class="sec__foot reveal">
+      <a class="btn btn--gold btn--lg" href="tel:+15551234567" data-site-tel>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1Z"/></svg>
+        Get yours on the schedule
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ WHY US ══════════════════════════ -->
+<section class="sec why" id="why">
+  <div class="wrap why__grid">
+    <div class="why__copy reveal">
+      <p class="eyebrow">Why Simply Spotless</p>
+      <h2>The difference is in <span class="grad">what we don't do.</span></h2>
+      <p>We don't blast 4,000 PSI at your siding. We don't leave zebra stripes on your
+        driveway. We don't disappear when something needs a second pass. Soft washing
+        cleans at the surface with the right detergent dwell time, so the grime releases
+        instead of getting driven into the material.</p>
+      <ul class="ticks">
+        <li>Licensed &amp; fully insured</li>
+        <li>Soft-wash safe for siding, shingles &amp; paint</li>
+        <li>Plant-and-pet-conscious detergents</li>
+        <li>Free, no-pressure on-site estimates</li>
+        <li>Upfront flat pricing — no surprise add-ons</li>
+        <li>Owner on every single job site</li>
+        <li>We move and replace your furniture</li>
+        <li>Text-ahead arrival window</li>
+        <li>Full rinse-down of windows, walks &amp; plants</li>
+        <li>Not happy? We come back. Free.</li>
+      </ul>
+      <a class="btn btn--gold" href="tel:+15551234567" data-site-tel>Talk to the owner</a>
+    </div>
+
+    <div class="why__media reveal" data-delay="1">
+      <div class="why__frame">
+        <img src="assets/img/why.jpg" alt="Technician soft washing a home exterior" data-fallback="assets/placeholders/why.svg">
+      </div>
+      <div class="why__chip">
+        <b>100%</b>
+        <span>Satisfaction<br>guarantee</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ PROCESS ══════════════════════════ -->
+<section class="sec process" id="process">
+  <div class="wrap">
+    <header class="sechead reveal">
+      <p class="eyebrow">How it works</p>
+      <h2>Three steps. <span class="grad">That's the whole thing.</span></h2>
+    </header>
+
+    <ol class="steps">
+      <li class="step reveal">
+        <span class="step__num">01</span>
+        <h3>Call for a quote</h3>
+        <p>One quick call. Tell us what needs cleaning, send a photo if it's easier,
+          and we'll give you a firm price — usually same day.</p>
+      </li>
+      <li class="step reveal" data-delay="1">
+        <span class="step__num">02</span>
+        <h3>Pick your day</h3>
+        <p>We work around your schedule, including weekends. You'll get a text the
+          morning of with a tight arrival window.</p>
+      </li>
+      <li class="step reveal" data-delay="2">
+        <span class="step__num">03</span>
+        <h3>Come home to spotless</h3>
+        <p>You don't need to be there. We clean, rinse everything down, and send you
+          the before-and-afters when we pack up.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ══════════════════════════ REVIEWS ══════════════════════════ -->
+<section class="sec reviews" id="reviews">
+  <div class="wrap">
+    <header class="sechead reveal">
+      <p class="eyebrow">Neighbors talking</p>
+      <h2>People stop us <span class="grad">in the driveway.</span></h2>
+    </header>
+
+    <div class="grid grid--rev">
+      <figure class="rev reveal">
+        <p class="stars">★★★★★</p>
+        <blockquote>Our vinyl siding had green streaks on the north side for three years.
+          I assumed it was permanent and we'd have to paint. Two hours later it looked
+          like the day we moved in. I genuinely could not believe it.</blockquote>
+        <figcaption><b>Danielle R.</b><span>House wash &amp; gutter brightening</span></figcaption>
+      </figure>
+      <figure class="rev reveal" data-delay="1">
+        <p class="stars">★★★★★</p>
+        <blockquote>Showed up exactly when he said, walked the whole property with me first,
+          and the price he quoted was the price I paid. The driveway looks better than the
+          concrete work my neighbor just had poured.</blockquote>
+        <figcaption><b>Marcus T.</b><span>Driveway &amp; walkway cleaning</span></figcaption>
+      </figure>
+      <figure class="rev reveal" data-delay="2">
+        <p class="stars">★★★★★</p>
+        <blockquote>I've hired two other companies before and both left streaks on the roof.
+          This was a soft wash, no ladder gouges, no shingle grit in the gutters, and the
+          black staining is completely gone. Worth every dollar.</blockquote>
+        <figcaption><b>Priya S.</b><span>Roof soft wash</span></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ FAQ ══════════════════════════ -->
+<section class="sec faq" id="faq">
+  <div class="wrap faq__grid">
+    <div class="faq__head reveal">
+      <p class="eyebrow">Good questions</p>
+      <h2>Before you <span class="grad">book.</span></h2>
+      <p>Still wondering about something? A two-minute phone call sorts it out faster
+        than any form.</p>
+      <a class="btn btn--gold" href="tel:+15551234567" data-site-tel>Call <span data-site="phone">(555) 123-4567</span></a>
+    </div>
+
+    <div class="faq__list reveal" data-delay="1">
+      <details class="qa">
+        <summary>How often should my house be washed?<i></i></summary>
+        <p>Most homes look their best on a once-a-year cycle. Shaded or wooded lots
+          with heavy tree cover tend to green up faster and do better every 8–10 months,
+          while sunnier exposures can stretch to 18 months.</p>
+      </details>
+      <details class="qa">
+        <summary>Will pressure washing damage my siding or roof?<i></i></summary>
+        <p>Not the way we do it. Siding, stucco, painted wood and shingles all get a
+          low-pressure soft wash — the detergent does the work and we rinse at roughly
+          garden-hose pressure. High pressure is reserved for concrete, brick and pavers.</p>
+      </details>
+      <details class="qa">
+        <summary>Are the detergents safe around plants and pets?<i></i></summary>
+        <p>We pre-wet and post-rinse all landscaping, use tarps where needed, and keep
+          animals inside until we've done the final rinse. Once everything is dry, the
+          yard is completely safe to use again.</p>
+      </details>
+      <details class="qa">
+        <summary>Do I need to be home?<i></i></summary>
+        <p>Nope. As long as we can reach an outside spigot and the gates are unlocked,
+          you can be at work. We'll text before we start and send photos when we're done.</p>
+      </details>
+      <details class="qa">
+        <summary>What does it cost?<i></i></summary>
+        <p>It depends on square footage, height and how much buildup there is — which is
+          why we quote rather than list prices. Most single-family house washes land in a
+          predictable range and we'll tell you the exact number before we touch anything.</p>
+      </details>
+      <details class="qa">
+        <summary>What if I'm not happy with the result?<i></i></summary>
+        <p>We come back and redo it at no charge. That's the whole guarantee — no forms,
+          no argument. It's happened rarely, and every time we fixed it same week.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ CTA ══════════════════════════ -->
+<section class="cta">
+  <div class="cta__media">
+    <img src="assets/img/cta.jpg" alt="" data-fallback="assets/placeholders/cta.svg">
+  </div>
+  <div class="wrap cta__inner reveal">
+    <h2>Ready to see your place <span class="grad">the way it looked new?</span></h2>
+    <p>One call. Free estimate. No forms, no sales pitch, no waiting on an email.</p>
+    <a class="btn btn--gold btn--xl" href="tel:+15551234567" data-site-tel>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1Z"/></svg>
+      <span data-site="phone">(555) 123-4567</span>
+    </a>
+    <p class="cta__note">Serving <span data-site="area">your local area</span> · Mon–Sat, 8am–6pm</p>
+  </div>
+</section>
+
+</main>
+
+<!-- ══════════════════════════ FOOTER ══════════════════════════ -->
+<footer class="ftr">
+  <div class="wrap ftr__grid">
+    <div class="ftr__brand">
+      <a class="brand brand--ftr" href="#top">
+        <svg class="brand__mark" viewBox="0 0 48 48" aria-hidden="true">
+          <path d="M24 3S6 24 6 35a18 18 0 0 0 36 0C42 24 24 3 24 3Z"/>
+          <path class="brand__shine" d="M17 33c0-6 5-12 5-12s-1 8 2 11 6 3 6 3-3 5-8 4-5-4-5-6Z"/>
+        </svg>
+        <span class="brand__txt"><strong>Simply Spotless</strong><em>Pressure Wash</em></span>
+      </a>
+      <p>Owner-operated exterior cleaning. Soft washing, pressure washing and surface
+        restoration for homes and small businesses.</p>
+      <a class="btn btn--gold" href="tel:+15551234567" data-site-tel>Call <span data-site="phone">(555) 123-4567</span></a>
+    </div>
+
+    <div class="ftr__col">
+      <h3>Services</h3>
+      <ul>
+        <li><a href="#services">House Washing</a></li>
+        <li><a href="#services">Roof Soft Washing</a></li>
+        <li><a href="#services">Driveways &amp; Concrete</a></li>
+        <li><a href="#services">Decks &amp; Fences</a></li>
+        <li><a href="#services">Gutter Brightening</a></li>
+        <li><a href="#services">Paver Restoration</a></li>
+      </ul>
+    </div>
+
+    <div class="ftr__col">
+      <h3>Company</h3>
+      <ul>
+        <li><a href="#why">Why Us</a></li>
+        <li><a href="#results">Before &amp; After</a></li>
+        <li><a href="#process">Our Process</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </div>
+
+    <div class="ftr__col">
+      <h3>Get in touch</h3>
+      <ul class="ftr__contact">
+        <li><a href="tel:+15551234567" data-site-tel><span data-site="phone">(555) 123-4567</span></a></li>
+        <li><a href="mailto:simply.spotless.powerwashing@gmail.com" data-site-mail><span data-site="email">simply.spotless.powerwashing@gmail.com</span></a></li>
+        <li><span data-site="area">Your local area</span></li>
+        <li>Mon–Sat · 8am–6pm</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="wrap ftr__base">
+    <p>© <span id="yr">2026</span> Simply Spotless Pressure Wash. All rights reserved.</p>
+    <p>Licensed &amp; insured · Free estimates</p>
+  </div>
+</footer>
+
+<!-- ══════════════════════════ MOBILE CALL BAR ══════════════════════════ -->
+<a class="callbar" href="tel:+15551234567" data-site-tel>
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1Z"/></svg>
+  Call for a free estimate
+</a>
+
+<script src="main.js"></script>
+</body>
+</html>

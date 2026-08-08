@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Placeholder hero image">
+  <defs>
+    <linearGradient id="hSky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0a2a4d"/><stop offset="55" stop-color="#1f6fa8"/>
+      <stop offset="1" stop-color="#71b8dd"/>
+    </linearGradient>
+    <linearGradient id="hRoof" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#123a5f"/><stop offset="1" stop-color="#2b6d9b"/>
+    </linearGradient>
+    <linearGradient id="hWall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f3f8fb"/><stop offset="1" stop-color="#c6d6e2"/>
+    </linearGradient>
+    <linearGradient id="hSpray" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity=".75"/>
+    </linearGradient>
+    <filter id="hBlur"><feGaussianBlur stdDeviation="14"/></filter>
+  </defs>
+
+  <rect width="1600" height="1000" fill="url(#hSky)"/>
+  <circle cx="1290" cy="180" r="120" fill="#ffe9b8" opacity=".18" filter="url(#hBlur)"/>
+
+  <path d="M0 760h1600v240H0z" fill="#0d2b47"/>
+  <path d="M180 760V400h620v360z" fill="url(#hWall)"/>
+  <path d="M120 400 490 190l370 210z" fill="url(#hRoof)"/>
+  <g stroke="#b9cdda" stroke-width="4" opacity=".7">
+    <path d="M180 450h620M180 500h620M180 550h620M180 600h620M180 650h620M180 700h620"/>
+  </g>
+  <rect x="270" y="480" width="130" height="120" fill="#7fd4f5" opacity=".9"/>
+  <rect x="580" y="480" width="130" height="120" fill="#7fd4f5" opacity=".9"/>
+  <rect x="430" y="600" width="110" height="160" fill="#0f3f66"/>
+
+  <path d="M900 1000c60-260 200-430 470-520" stroke="url(#hSpray)" stroke-width="130"
+        fill="none" stroke-linecap="round" opacity=".35" filter="url(#hBlur)"/>
+  <path d="M930 990c50-230 180-390 430-470" stroke="#ffffff" stroke-width="26"
+        fill="none" stroke-linecap="round" opacity=".45"/>
+
+  <g fill="#ffffff" opacity=".55">
+    <circle cx="1180" cy="470" r="9"/><circle cx="1260" cy="410" r="6"/><circle cx="1120" cy="540" r="7"/>
+    <circle cx="1330" cy="360" r="5"/><circle cx="1040" cy="620" r="8"/><circle cx="1400" cy="330" r="7"/>
+  </g>
+
+  <path d="M960 1000c-30-120 20-230 90-270l70 40c-60 60-90 150-70 230z" fill="#0b2036" opacity=".85"/>
+  <circle cx="1075" cy="690" r="52" fill="#0b2036" opacity=".85"/>
+</svg>
