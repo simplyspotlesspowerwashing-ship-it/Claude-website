@@ -34,9 +34,9 @@
   <g fill="#ffffff" opacity=".5">
     <path d="M0 470h800v10H0z"/>
   </g>
-  <g fill="#7fd4f5" opacity=".9">
+  <g fill="#19C9FA" opacity=".9">
     <circle cx="120" cy="520" r="6"/><circle cx="150" cy="540" r="4"/><circle cx="95" cy="548" r="3"/>
   </g>
   <text x="400" y="556" font-family="system-ui,sans-serif" font-size="21" font-weight="600"
-        fill="#0b2e54" fill-opacity=".55" text-anchor="middle" letter-spacing="3">AFTER — ADD YOUR PHOTO</text>
+        fill="#0A3A54" fill-opacity=".55" text-anchor="middle" letter-spacing="3">AFTER — ADD YOUR PHOTO</text>
 </svg>

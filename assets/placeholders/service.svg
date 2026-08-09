@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Placeholder service photo">
+  <defs>
+    <linearGradient id="sBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0A3A54"/><stop offset="1" stop-color="#19C9FA"/>
+    </linearGradient>
+    <linearGradient id="sSpray" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity=".55"/>
+    </linearGradient>
+    <filter id="sBlur"><feGaussianBlur stdDeviation="16"/></filter>
+  </defs>
+  <rect width="800" height="500" fill="url(#sBg)"/>
+  <g stroke="#ffffff" stroke-width="3" opacity=".14">
+    <path d="M0 90h800M0 180h800M0 270h800M0 360h800M0 450h800"/>
+  </g>
+  <path d="M120 500c-20-170 70-300 260-360" stroke="url(#sSpray)" stroke-width="120"
+        fill="none" stroke-linecap="round" opacity=".45" filter="url(#sBlur)"/>
+  <g fill="#ffffff" opacity=".5">
+    <circle cx="470" cy="150" r="9"/><circle cx="530" cy="110" r="6"/><circle cx="430" cy="210" r="5"/>
+    <circle cx="590" cy="170" r="7"/><circle cx="640" cy="120" r="4"/>
+  </g>
+  <text x="400" y="465" font-family="system-ui,sans-serif" font-size="20" font-weight="700"
+        fill="#ffffff" fill-opacity=".75" text-anchor="middle" letter-spacing="3">ADD YOUR PHOTO</text>
+</svg>

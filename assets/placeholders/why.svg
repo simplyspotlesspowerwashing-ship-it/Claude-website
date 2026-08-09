@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Placeholder image of a technician working">
   <defs>
     <linearGradient id="wBg" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#0f4671"/><stop offset="1" stop-color="#3f97cd"/>
+      <stop offset="0" stop-color="#0A3A54"/><stop offset="1" stop-color="#19C9FA"/>
     </linearGradient>
     <linearGradient id="wSpray" x1="0" y1="1" x2="1" y2="0">
       <stop offset="0" stop-color="#ffffff" stop-opacity="0"/>
@@ -26,7 +26,7 @@
     <circle cx="430" cy="500" r="70"/>
     <path d="M470 520 640 400l30 40-170 125z"/>
   </g>
-  <g fill="#e8ad3a">
+  <g fill="#19C9FA">
     <path d="M362 470c0-38 31-68 68-68s68 30 68 68z"/>
   </g>
   <g fill="#ffffff" opacity=".6">

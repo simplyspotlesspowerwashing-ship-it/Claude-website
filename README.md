@@ -39,8 +39,9 @@ through them.
 | File | Where it shows up | Best shape |
 |---|---|---|
 | `hero.jpg` | full-screen image behind the headline | wide, 2000×1200 or larger |
-| `why.jpg` | the "Why Simply Spotless" section | tall, 4:5 portrait |
+| `why.jpg` | the round photo in the intro section | square, it gets circle-cropped |
 | `cta.jpg` | background of the bottom call band | wide |
+| `svc-house.jpg`, `svc-driveway.jpg`, `svc-deck.jpg`, `svc-gutter.jpg`, `svc-patio.jpg` | tops of the five service cards | 16:10 landscape |
 | `ba-1-before.jpg` / `ba-1-after.jpg` | first before/after slider | 4:3 |
 | `ba-2-before.jpg` / `ba-2-after.jpg` | second slider | 4:3 |
 | … through `ba-6-…` | six sliders total | 4:3 |
