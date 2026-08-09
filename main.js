@@ -18,7 +18,11 @@ const SITE = {
   // Google rating badge. Leave reviewCount as null and the badge stays hidden —
   // set BOTH to your real numbers to switch it on. Don't invent these.
   rating: null,                                         // e.g. 5.0
-  reviewCount: null                                     // e.g. 47
+  reviewCount: null,                                    // e.g. 47
+
+  // The scratch-off discount panel
+  discountText: '10% Off Your First Wash',
+  discountCode: 'SPOTLESS10'
 };
 
 /* ╔═══════════════════════════════════════════════════════════════════╗
@@ -95,7 +99,10 @@ const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>
 
 /* ── Contact details ──────────────────────────────────────────────── */
 function applySiteDetails() {
-  const map = { phone:SITE.phone, email:SITE.email, area:SITE.area, reviewsLine:SITE.reviewsLine };
+  const map = {
+    phone:SITE.phone, email:SITE.email, area:SITE.area, reviewsLine:SITE.reviewsLine,
+    discountText:SITE.discountText, discountCode:SITE.discountCode
+  };
   Object.entries(map).forEach(([k,v]) => {
     if (v == null) return;
     $$(`[data-site="${k}"]`).forEach(el => el.textContent = v);
@@ -276,6 +283,270 @@ function initSlider(frame) {
   guardAll(frame);
 }
 
+/* ── Scratch-off discount panel ───────────────────────────────────────
+   A canvas of "grime" sits over the prize. Dragging erases it with
+   destination-out compositing. Once enough is gone the rest fades away.
+   ─────────────────────────────────────────────────────────────────── */
+function initScratch() {
+  const root   = $('#scratch');
+  const canvas = $('#scratchCanvas');
+  const meter  = $('#scratchMeter');
+  const revealBtn = $('#scratchReveal');
+  const codeBtn = $('#scratchCode');
+  const video  = $('#scratchVideo');
+  if (!root || !canvas) return;
+
+  // if the video can't load or play, fall back to the gradient panel
+  if (video) {
+    const fail = () => root.classList.add('no-video');
+    video.addEventListener('error', fail);
+    video.addEventListener('stalled', fail);
+    if (video.querySelectorAll('source').length) {
+      const last = video.querySelectorAll('source')[video.querySelectorAll('source').length - 1];
+      last.addEventListener('error', fail);
+    }
+    const play = video.play?.();
+    if (play && play.catch) play.catch(() => { /* autoplay blocked — poster still shows */ });
+  }
+
+  const ctx = canvas.getContext('2d', { willReadFrequently: true });
+  let done = false, drawing = false, last = null, w = 0, h = 0;
+
+  function paintGrime() {
+    const r = canvas.getBoundingClientRect();
+    const dpr = Math.min(devicePixelRatio || 1, 2);
+    w = Math.max(1, Math.round(r.width));
+    h = Math.max(1, Math.round(r.height));
+    canvas.width  = w * dpr;
+    canvas.height = h * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.clearRect(0, 0, w, h);
+
+    // base film of dirt
+    const g = ctx.createLinearGradient(0, 0, w, h);
+    g.addColorStop(0,   '#7c8a86');
+    g.addColorStop(.45, '#98a49a');
+    g.addColorStop(1,   '#6f7d74');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, w, h);
+
+    // blotches of algae and water spotting
+    for (let i = 0; i < 90; i++) {
+      const x = Math.random() * w, y = Math.random() * h;
+      const rad = 12 + Math.random() * 70;
+      const b = ctx.createRadialGradient(x, y, 0, x, y, rad);
+      const dark = Math.random() > .55;
+      b.addColorStop(0, dark ? 'rgba(60,78,52,.5)' : 'rgba(255,255,255,.24)');
+      b.addColorStop(1, 'rgba(255,255,255,0)');
+      ctx.fillStyle = b;
+      ctx.beginPath(); ctx.arc(x, y, rad, 0, Math.PI * 2); ctx.fill();
+    }
+    // streaks running down the glass
+    ctx.strokeStyle = 'rgba(70,90,70,.16)';
+    for (let i = 0; i < 34; i++) {
+      const x = Math.random() * w;
+      ctx.lineWidth = 1 + Math.random() * 5;
+      ctx.beginPath();
+      ctx.moveTo(x, 0);
+      ctx.bezierCurveTo(x + 14, h * .35, x - 14, h * .7, x + 6, h);
+      ctx.stroke();
+    }
+    ctx.globalCompositeOperation = 'destination-out';
+  }
+
+  const pos = e => {
+    const r = canvas.getBoundingClientRect();
+    const t = e.touches ? e.touches[0] : e;
+    return { x: t.clientX - r.left, y: t.clientY - r.top };
+  };
+
+  function wipe(a, b) {
+    const radius = Math.max(26, Math.min(w, h) * 0.075);
+    // destination-out erases in proportion to source alpha, so these must be
+    // fully opaque — otherwise the grime only thins instead of clearing.
+    ctx.strokeStyle = '#000';
+    ctx.fillStyle = '#000';
+    ctx.lineWidth = radius * 2;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.beginPath();
+    ctx.moveTo(a.x, a.y);
+    ctx.lineTo(b.x, b.y);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(b.x, b.y, radius, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // how much has been cleared, sampled on a coarse grid so it stays cheap
+  function cleared() {
+    const step = 8;
+    const data = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+    let clear = 0, total = 0;
+    const rowBytes = canvas.width * 4;
+    for (let y = 0; y < canvas.height; y += step) {
+      for (let x = 0; x < canvas.width; x += step) {
+        total++;
+        if (data[y * rowBytes + x * 4 + 3] < 40) clear++;
+      }
+    }
+    return total ? clear / total : 0;
+  }
+
+  function finish() {
+    if (done) return;
+    done = true;
+    root.classList.add('done');
+    setMeter(1);
+    if (codeBtn) codeBtn.focus({ preventScroll: true });
+  }
+
+  function setMeter(frac) {
+    const pct = Math.round(Math.min(1, frac) * 100);
+    if (!meter) return;
+    meter.firstElementChild.style.width = pct + '%';
+    meter.setAttribute('aria-valuenow', pct);
+  }
+
+  let checkQueued = false;
+  function queueCheck() {
+    if (checkQueued || done) return;
+    checkQueued = true;
+    setTimeout(() => {
+      checkQueued = false;
+      if (done) return;
+      const frac = cleared();
+      setMeter(frac / 0.55);
+      if (frac >= 0.55) finish();      // enough scrubbed — wipe the rest for them
+    }, 180);
+  }
+
+  const start = e => {
+    if (done) return;
+    drawing = true;
+    root.classList.add('started');
+    last = pos(e);
+    wipe(last, last);
+    queueCheck();
+  };
+  const move = e => {
+    if (!drawing || done) return;
+    if (e.cancelable && e.touches) e.preventDefault();
+    const p = pos(e);
+    wipe(last, p);
+    last = p;
+    queueCheck();
+  };
+  const end = () => { drawing = false; };
+
+  canvas.addEventListener('mousedown', start);
+  canvas.addEventListener('touchstart', start, { passive: true });
+  window.addEventListener('mousemove', move);
+  window.addEventListener('touchmove', move, { passive: false });
+  window.addEventListener('mouseup', end);
+  window.addEventListener('touchend', end);
+
+  // trackpad users often hover rather than drag, so hovering scrubs too
+  canvas.addEventListener('mousemove', e => {
+    if (drawing || done || !matchMedia('(hover:hover) and (pointer:fine)').matches) return;
+    const p = pos(e);
+    if (last) wipe(last, p); else wipe(p, p);
+    last = p;
+    root.classList.add('started');
+    queueCheck();
+  });
+  canvas.addEventListener('mouseleave', () => { last = null; });
+
+  if (revealBtn) revealBtn.addEventListener('click', finish);
+
+  if (codeBtn) {
+    codeBtn.addEventListener('click', async () => {
+      const code = codeBtn.querySelector('span').textContent.trim();
+      try {
+        await navigator.clipboard.writeText(code);
+        const original = codeBtn.querySelector('span').textContent;
+        codeBtn.classList.add('copied');
+        codeBtn.querySelector('span').textContent = 'Copied!';
+        setTimeout(() => {
+          codeBtn.classList.remove('copied');
+          codeBtn.querySelector('span').textContent = original;
+        }, 1600);
+      } catch { /* clipboard unavailable — the code is on screen anyway */ }
+    });
+  }
+
+  paintGrime();
+  let rt;
+  addEventListener('resize', () => {
+    clearTimeout(rt);
+    rt = setTimeout(() => { if (!done) paintGrime(); }, 200);
+  });
+
+  // anyone who asked for reduced motion just gets the prize
+  if (reduced) finish();
+}
+
+/* ── Ambient bubbles in the dark bands ────────────────────────────── */
+function initBubbles() {
+  if (reduced) return;
+  $$('.bubbles').forEach(host => {
+    const count = innerWidth < 700 ? 10 : 18;
+    host.innerHTML = Array.from({ length: count }, () => {
+      const size = 8 + Math.random() * 34;
+      const left = Math.random() * 100;
+      const dur = 11 + Math.random() * 16;
+      const delay = -Math.random() * dur;
+      const drift = (Math.random() * 90 - 45).toFixed(0);
+      return `<span style="width:${size}px;height:${size}px;left:${left}%;
+        animation-duration:${dur}s;animation-delay:${delay}s;--drift:${drift}px"></span>`;
+    }).join('');
+  });
+}
+
+/* ── Headings rise a word at a time ───────────────────────────────── */
+function initSplitHeadings() {
+  if (reduced || !('IntersectionObserver' in window)) return;
+
+  const heads = $$('.sechead h2, .hero__title, .band__inner h2, .cta__inner h2');
+  heads.forEach(h => {
+    if (h.classList.contains('hero__title')) return;   // hero has its own animation
+    // wrap each word, keeping any inline markup (like <span class="cy">) intact
+    const walk = node => {
+      [...node.childNodes].forEach(child => {
+        if (child.nodeType === 3) {
+          const frag = document.createDocumentFragment();
+          child.textContent.split(/(\s+)/).forEach(part => {
+            if (!part.trim()) { frag.appendChild(document.createTextNode(part)); return; }
+            const outer = document.createElement('span');
+            outer.className = 'split';
+            const inner = document.createElement('i');
+            inner.textContent = part;
+            outer.appendChild(inner);
+            frag.appendChild(outer);
+          });
+          child.replaceWith(frag);
+        } else if (child.nodeType === 1) {
+          walk(child);
+        }
+      });
+    };
+    walk(h);
+
+    const words = $$('.split', h);
+    words.forEach((wd, i) => wd.querySelector('i').style.setProperty('--d', (i * 0.045) + 's'));
+
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(en => {
+        if (!en.isIntersecting) return;
+        io.disconnect();
+        words.forEach(wd => wd.classList.add('in'));
+      });
+    }, { threshold: 0.3 });
+    io.observe(h);
+  });
+}
+
 /* ── Scroll reveal ────────────────────────────────────────────────── */
 function initReveal() {
   const items = $$('.reveal');
@@ -376,6 +647,9 @@ buildReviews();
 buildGallery();
 applySiteDetails();   // after building, so generated markup gets the details too
 guardAll();
+initBubbles();
+initSplitHeadings();  // before initReveal, so word wrapping happens once
+initScratch();
 initReveal();
 initHeader();
 initMenu();

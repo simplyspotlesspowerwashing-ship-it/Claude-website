@@ -68,7 +68,28 @@ const PROJECTS = [
 
 The services grid works the same way — see the `SERVICES` list just below it.
 
-## 3. Publish it
+## 3. The scratch-off discount
+
+The "Claim Your Discount" section hides a code behind a layer of grime that
+visitors wipe away by dragging across it — mouse, finger or trackpad. At roughly
+half cleaned it finishes the job for them and shows the code, which they can
+click to copy. There's a **Reveal it for me** button for keyboard users, and
+anyone browsing with reduced motion turned on skips straight to the code.
+
+Change the offer in `main.js`:
+
+```js
+discountText: '10% Off Your First Wash',
+discountCode: 'SPOTLESS10'
+```
+
+**The video behind it** lives at `assets/video/clean.mp4`. Swap that file to
+change the footage — keep it short, silent and loop-friendly, since it autoplays
+muted on a loop. Add `assets/video/clean.webm` too if you want smaller files for
+Chrome and Firefox. If neither file loads, the panel falls back to a blue
+gradient, so nothing breaks.
+
+## 4. Publish it
 
 Because it's static, anything will host it:
 

@@ -106,6 +106,27 @@ body.loaded .loader{opacity:0;visibility:hidden}
   white-space:nowrap;
 }
 .btn:hover{transform:translateY(-2px)}
+/* light sweeps across the button on hover */
+.btn{overflow:hidden;isolation:isolate}
+.btn::after{
+  content:"";position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(100deg,transparent 20%,rgba(255,255,255,.55),transparent 80%);
+  transform:translateX(-130%);transition:transform .75s var(--ease);
+}
+.btn:hover::after{transform:translateX(130%)}
+
+/* the Discount nav link gets a quiet pulse so people notice it */
+.nav__hot{position:relative}
+.nav__hot::before{
+  content:"";position:absolute;left:-.7rem;top:50%;translate:0 -50%;
+  width:7px;height:7px;border-radius:50%;background:var(--cyan);
+  animation:ping 2.2s ease-out infinite;
+}
+@keyframes ping{
+  0%{box-shadow:0 0 0 0 rgba(25,201,250,.7)}
+  70%{box-shadow:0 0 0 9px rgba(25,201,250,0)}
+  100%{box-shadow:0 0 0 0 rgba(25,201,250,0)}
+}
 .btn--cyan{background:var(--cyan);color:var(--deep);box-shadow:0 6px 18px -6px rgba(25,201,250,.75)}
 .btn--cyan:hover{background:var(--cyan-l);box-shadow:0 12px 26px -8px rgba(25,201,250,.85)}
 .btn--phone{background:transparent;color:#fff;border-color:rgba(255,255,255,.85)}
@@ -149,40 +170,41 @@ body.loaded .loader{opacity:0;visibility:hidden}
 .brand__txt strong{font-size:1.18rem;font-weight:900;color:#fff;text-transform:uppercase;letter-spacing:-.01em}
 .brand__txt em{font-style:normal;font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:var(--cyan)}
 
-/* the "Get A Free Quote / It Takes Only 5 Seconds" block, visible once stuck */
+/* the "Get A Free Quote / It Takes Only 5 Seconds" block — small screens only,
+   where the nav collapses into the burger anyway */
 .hdr__pitch{display:none;flex-direction:column;line-height:1.15;color:#fff}
 .hdr__pitch strong{font-weight:900;font-size:1.22rem;text-transform:uppercase}
 .hdr__pitch span{font-size:.82rem;color:rgba(255,255,255,.7)}
-.hdr.stuck .hdr__pitch{display:flex}
-.hdr.stuck .brand{display:none}
 
 .nav{display:flex;align-items:center;margin-left:auto}
-.nav ul{display:flex;gap:1.6rem}
+.nav ul{display:flex;gap:1.6rem;transition:gap .35s var(--ease)}
+.hdr.stuck .nav ul{gap:1.25rem}
 .nav a{
-  text-decoration:none;color:#fff;font-weight:500;font-size:.98rem;
+  text-decoration:none;color:#fff;font-weight:500;font-size:.98rem;white-space:nowrap;
   position:relative;padding:.3rem 0;transition:color .25s;
 }
 .nav ul a::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:2px;background:var(--cyan);transition:right .3s var(--ease)}
 .nav ul a:hover,.nav ul a.active{color:var(--cyan)}
 .nav ul a:hover::after,.nav ul a.active::after{right:0}
-.hdr.stuck .nav{display:none}
 
-.hdr__actions{display:flex;align-items:center;gap:.7rem;margin-left:auto}
+.hdr__actions{display:flex;align-items:center;gap:.7rem;margin-left:1.4rem}
+/* With the nav links kept on desktop there isn't room for a second CTA pill —
+   the phone pill is the call to action. It returns on small screens instead. */
 .hdr__quote{display:none}
-.hdr.stuck .hdr__quote{display:inline-flex}
 
 .burger{display:none;width:44px;height:38px;border:0;background:transparent;cursor:pointer;padding:0;position:relative;z-index:3}
 .burger span{position:absolute;left:7px;right:7px;height:3px;background:#fff;border-radius:2px;transition:.35s var(--ease)}
 .burger span:nth-child(1){top:10px}
 .burger span:nth-child(2){top:18px}
 .burger span:nth-child(3){top:26px}
-.hdr.stuck .burger{display:block}
 body.menu-open .burger span:nth-child(1){top:18px;transform:rotate(45deg)}
 body.menu-open .burger span:nth-child(2){opacity:0}
 body.menu-open .burger span:nth-child(3){top:18px;transform:rotate(-45deg)}
 
 /* ── Waves ──────────────────────────────────────────────── */
-.wave{position:absolute;left:0;right:0;line-height:0;pointer-events:none;z-index:2}
+/* overflow:hidden matters — the svg inside is drawn wider than the band so the
+   sway animation never exposes an edge, and without this it widens the page */
+.wave{position:absolute;left:0;right:0;line-height:0;pointer-events:none;z-index:2;overflow:hidden}
 .wave svg{width:100%;height:clamp(56px,7vw,120px);display:block}
 .wave__a{fill:var(--cyan)}
 .wave__b{fill:var(--ice)}
@@ -190,6 +212,12 @@ body.menu-open .burger span:nth-child(3){top:18px;transform:rotate(-45deg)}
 .wave--top{top:-1px}
 .wave--bottom{bottom:-1px}
 .wave--toDeep .wave__b{fill:var(--deep)}
+/* the two layers sway at different speeds so the water keeps moving.
+   The svg is drawn wider than the band so the sway never exposes an edge. */
+.wave svg{width:108%;margin-left:-4%}
+.wave__a{animation:sway 11s ease-in-out infinite}
+.wave__b{animation:sway 16s ease-in-out infinite reverse}
+@keyframes sway{0%,100%{transform:translateX(0)}50%{transform:translateX(-2.5%)}}
 
 /* ── Hero ───────────────────────────────────────────────── */
 .hero{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden;isolation:isolate}
@@ -417,6 +445,75 @@ body.menu-open .burger span:nth-child(3){top:18px;transform:rotate(-45deg)}
 .ba figcaption b{display:block;font-weight:900;text-transform:uppercase;font-size:1rem;color:#fff}
 .ba figcaption span{font-size:.88rem;color:rgba(255,255,255,.6)}
 
+/* ── Scratch-off discount ───────────────────────────────── */
+.discount{background:linear-gradient(170deg,var(--deep-2),var(--deep));color:rgba(255,255,255,.78);position:relative;overflow:hidden}
+.discount h2{color:#fff}
+.kicker--light{color:var(--cyan-l)}
+.scratch{max-width:920px;margin-inline:auto}
+.scratch__stage{
+  position:relative;aspect-ratio:16/9;border-radius:var(--r-card);overflow:hidden;
+  box-shadow:var(--sh-lg),0 0 0 1px rgba(255,255,255,.12);background:var(--deep-3);
+}
+.scratch__under{position:absolute;inset:0}
+.scratch__video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.scratch__shade{position:absolute;inset:0;background:linear-gradient(110deg,rgba(5,32,47,.86),rgba(10,58,84,.66))}
+/* no video file yet? fall back to a clean gradient so it still looks deliberate */
+.scratch.no-video .scratch__video{display:none}
+.scratch.no-video .scratch__shade{background:linear-gradient(135deg,#0A3A54,#19C9FA)}
+
+.scratch__prize{position:absolute;inset:0;display:grid;align-content:center;justify-items:center;text-align:center;padding:1.5rem;gap:.35rem}
+.scratch__label{margin:0;font-size:.8rem;letter-spacing:.24em;text-transform:uppercase;color:var(--cyan-l);font-weight:700}
+.scratch__amount{margin:0;font-weight:900;text-transform:uppercase;color:#fff;font-size:clamp(1.4rem,3.4vw,2.6rem);line-height:1.1}
+.scratch__code{
+  margin-top:.7rem;display:inline-flex;align-items:center;gap:.7rem;cursor:pointer;
+  background:var(--cyan);color:var(--deep);border:0;border-radius:var(--r-pill);
+  padding:.75rem 1.5rem;font-family:var(--font);font-weight:900;font-size:clamp(1.05rem,2.2vw,1.5rem);
+  letter-spacing:.12em;box-shadow:0 10px 26px -10px rgba(25,201,250,.9);
+  transition:transform .25s var(--ease),background .25s;
+}
+.scratch__code:hover{transform:translateY(-2px);background:var(--cyan-l)}
+.scratch__code svg{width:1em;height:1em;fill:none;stroke:var(--deep);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.scratch__code.copied{background:#fff}
+.scratch__terms{margin:.9rem 0 0;font-size:.86rem;color:rgba(255,255,255,.72)}
+
+.scratch__canvas{position:absolute;inset:0;width:100%;height:100%;cursor:grab;touch-action:none;transition:opacity .7s var(--ease)}
+.scratch__canvas:active{cursor:grabbing}
+.scratch.done .scratch__canvas{opacity:0;pointer-events:none}
+
+.scratch__hint{
+  position:absolute;left:50%;top:50%;translate:-50% -50%;pointer-events:none;
+  display:grid;justify-items:center;gap:.5rem;color:#fff;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;font-size:.82rem;
+  text-shadow:0 2px 12px rgba(0,0,0,.6);transition:opacity .4s;
+}
+.scratch__hand{display:grid;place-items:center;width:52px;height:52px}
+.scratch__hand svg{width:38px;height:38px;fill:none;stroke:#fff;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.scratch__hand{animation:wipe 2.4s var(--ease) infinite}
+@keyframes wipe{0%,100%{transform:translateX(-26px) rotate(-8deg)}50%{transform:translateX(26px) rotate(8deg)}}
+.scratch.started .scratch__hint{opacity:0}
+
+.scratch__foot{display:flex;align-items:center;gap:1.2rem;margin-top:1.3rem;flex-wrap:wrap}
+.scratch__meter{flex:1;min-width:180px;height:8px;border-radius:8px;background:rgba(255,255,255,.14);overflow:hidden}
+.scratch__meter i{display:block;height:100%;width:0;border-radius:8px;background:linear-gradient(90deg,var(--cyan),var(--cyan-l));transition:width .25s var(--ease)}
+.scratch__skip{padding:.7rem 1.4rem;font-size:.82rem}
+.scratch.done .scratch__skip{opacity:.35;pointer-events:none}
+
+/* ── Ambient bubbles for dark bands ─────────────────────── */
+.bubbles{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.bubbles span{
+  position:absolute;bottom:-12%;border-radius:50%;
+  background:radial-gradient(circle at 32% 30%,rgba(255,255,255,.5),rgba(127,224,255,.16) 60%,transparent 70%);
+  border:1px solid rgba(255,255,255,.14);
+  animation:rise linear infinite;
+}
+@keyframes rise{
+  0%{transform:translateY(0) translateX(0) scale(.7);opacity:0}
+  10%{opacity:.7}
+  90%{opacity:.5}
+  100%{transform:translateY(-118vh) translateX(var(--drift,20px)) scale(1.1);opacity:0}
+}
+.discount .wrap,.results .wrap,.why .wrap{position:relative;z-index:1}
+
 /* ── CTA band with photo ────────────────────────────────── */
 .cta{position:relative;padding:clamp(4.5rem,8vw,7rem) 0;text-align:center;overflow:hidden;isolation:isolate}
 .cta__media{position:absolute;inset:0;z-index:-2}
@@ -479,6 +576,14 @@ body.menu-open .burger span:nth-child(3){top:18px;transform:rotate(-45deg)}
 .reveal[data-delay="2"]{transition-delay:.2s}
 .reveal[data-delay="3"]{transition-delay:.3s}
 
+/* section headings rise a word at a time when they scroll into view */
+.split{display:inline-block;overflow:hidden;vertical-align:bottom}
+.split>i{
+  display:inline-block;font-style:inherit;transform:translateY(110%);
+  transition:transform .75s var(--ease);transition-delay:var(--d,0s);
+}
+.split.in>i{transform:none}
+
 /* ── Responsive ─────────────────────────────────────────── */
 @media (max-width:1100px){
   .nav ul{gap:1.1rem}
@@ -507,8 +612,10 @@ body.menu-open .burger span:nth-child(3){top:18px;transform:rotate(-45deg)}
   .nav ul a::after{display:none}
   .brand{position:relative;z-index:3}
   .hdr.stuck .brand{display:flex}
-  .hdr__pitch,.hdr.stuck .hdr__pitch{display:none}
-  .hdr__quote,.hdr.stuck .hdr__quote{display:none}
+  .hdr.stuck .hdr__pitch{display:flex}
+  .hdr.stuck .brand{display:none}
+  .hdr.stuck .hdr__quote{display:inline-flex;font-size:.78rem;padding:.6rem .5rem .6rem 1rem}
+  .hdr__actions{margin-left:auto}
   .hdr__actions{gap:.5rem}
   .steps{grid-template-columns:1fr;gap:3.2rem}
   .steps::before,.steps::after{display:none}

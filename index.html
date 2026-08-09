@@ -58,12 +58,12 @@
 
     <nav class="nav" id="nav" aria-label="Primary">
       <ul>
-        <li><a href="#top">Home</a></li>
         <li><a href="#services">Services</a></li>
         <li><a href="#why">Why Us</a></li>
         <li><a href="#process">Process</a></li>
         <li><a href="#reviews">Reviews</a></li>
         <li><a href="#results">Gallery</a></li>
+        <li><a class="nav__hot" href="#discount">Discount</a></li>
         <li><a href="#faq">FAQ</a></li>
       </ul>
     </nav>
@@ -325,6 +325,71 @@
         to see the difference.</p>
     </header>
     <div class="grid grid--ba" id="baGrid"><!-- built by main.js --></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ SCRATCH-OFF DISCOUNT ══════════════════════════
+     Drag across the grimy panel to "wash" it clean and uncover the code.
+     Works with mouse, finger and trackpad; there's a Reveal button for
+     keyboard users and anyone on reduced motion.
+     ═══════════════════════════════════════════════════════════════════════ -->
+<section class="sec discount" id="discount">
+  <div class="bubbles" aria-hidden="true"></div>
+  <div class="wrap">
+    <header class="sechead reveal">
+      <p class="kicker kicker--center kicker--light">A Little Something</p>
+      <h2>Wash The Window, <span class="cy">Claim Your Discount</span></h2>
+      <p class="lede">Drag across the dirty glass below — just like we would — and see what's
+        hiding underneath.</p>
+    </header>
+
+    <div class="scratch reveal" id="scratch">
+      <div class="scratch__stage">
+        <!-- what's underneath: your video, with the code over the top -->
+        <div class="scratch__under">
+          <video class="scratch__video" id="scratchVideo"
+                 autoplay muted loop playsinline preload="metadata"
+                 poster="assets/placeholders/video-poster.svg">
+            <source src="assets/video/clean.webm" type="video/webm">
+            <source src="assets/video/clean.mp4" type="video/mp4">
+          </video>
+          <div class="scratch__shade"></div>
+          <div class="scratch__prize">
+            <p class="scratch__label">Your discount</p>
+            <p class="scratch__amount" data-site="discountText">10% off your first wash</p>
+            <button class="scratch__code" id="scratchCode" type="button" title="Click to copy">
+              <span data-site="discountCode">SPOTLESS10</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+            </button>
+            <p class="scratch__terms">Mention it when you call — <span data-site="phone">(845) 650 7548</span></p>
+          </div>
+        </div>
+
+        <!-- the grime layer you scrub away -->
+        <canvas class="scratch__canvas" id="scratchCanvas"></canvas>
+
+        <div class="scratch__hint" id="scratchHint">
+          <span class="scratch__hand">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V11m0-1.5a1.5 1.5 0 0 1 3 0V12m0-1a1.5 1.5 0 0 1 3 0v4.5a5.5 5.5 0 0 1-5.5 5.5H11a5 5 0 0 1-4.4-2.6L4 14.5a1.6 1.6 0 0 1 2.6-1.8L9 15"/></svg>
+          </span>
+          Drag to wash
+        </div>
+      </div>
+
+      <div class="scratch__foot">
+        <div class="scratch__meter" role="progressbar" aria-label="Window cleaned" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="scratchMeter">
+          <i></i>
+        </div>
+        <button class="btn btn--outline scratch__skip" id="scratchReveal" type="button">Reveal it for me</button>
+      </div>
+    </div>
+
+    <div class="sec__foot reveal">
+      <a class="btn btn--cyan btn--lg btn--ico" href="tel:+18456507548" data-site-tel>
+        Claim It On The Phone
+        <i class="btn__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h14M13 6l6 6-6 6"/></svg></i>
+      </a>
+    </div>
   </div>
 </section>
 
