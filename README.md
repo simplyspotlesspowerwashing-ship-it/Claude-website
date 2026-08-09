@@ -69,16 +69,12 @@ const PROJECTS = [
 
 The services grid works the same way — see the `SERVICES` list just below it.
 
-### Where the current artwork came from
+### A note on the animation
 
-`hero.jpg`, `why.jpg`, `cta.jpg` and `discount-clean.jpg` are stills cut from
-your own animation (`assets/video/clean.mp4`), so the site is branded and
-consistent out of the box. Replace any of them with real job photos whenever
-you have them — the filenames are all that matter.
-
-The before/after sliders are deliberately still on neutral placeholders. That
-section says the results are straight off the truck, so it should only ever
-hold real photographs of real jobs, not frames from the animation.
+The only place the animation appears is the scratch-off discount panel — the
+video itself plus `discount-clean.jpg`, which is a still from it used as the
+backdrop while the video loads. Everywhere else is waiting on real photographs
+and shows a placeholder until you drop one in.
 
 ## 3. The scratch-off discount
 
