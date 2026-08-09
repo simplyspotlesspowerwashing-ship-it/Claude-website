@@ -71,15 +71,16 @@ The services grid works the same way — see the `SERVICES` list just below it.
 
 ### A note on the animation
 
-The only place the animation appears is the scratch-off discount panel — the
-video itself plus `discount-clean.jpg`, which is a still from it used as the
-backdrop while the video loads. Everywhere else is waiting on real photographs
-and shows a placeholder until you drop one in.
+The animation appears in one place only: the Deal popup. That's the video
+itself plus `discount-clean.jpg`, a still from it shown behind the video while
+it loads. Nothing on the page itself uses it — every other image slot is
+waiting on a real photograph and shows a placeholder until you drop one in.
 
 ## 3. The scratch-off discount
 
-The "Claim Your Discount" section hides a code behind a layer of grime that
-visitors wipe away by dragging across it — mouse, finger or trackpad. At roughly
+The Deal popup opens from the "Deal" tab in the header (and from the $25 badge
+in the hero). It hides the offer behind a layer of green algae that visitors
+wipe away by dragging across it — mouse, finger or trackpad. At roughly
 half cleaned it finishes the job for them and shows the code, which they can
 click to copy. There's a **Reveal it for me** button for keyboard users, and
 anyone browsing with reduced motion turned on skips straight to the code.

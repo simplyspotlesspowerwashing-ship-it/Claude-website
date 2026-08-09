@@ -63,8 +63,8 @@
         <li><a href="#process">Process</a></li>
         <li><a href="#reviews">Reviews</a></li>
         <li><a href="#results">Gallery</a></li>
-        <li><a class="nav__hot" href="#discount">Discount</a></li>
         <li><a href="#faq">FAQ</a></li>
+        <li><button class="nav__deal" type="button" data-deal-open>Deal</button></li>
       </ul>
     </nav>
 
@@ -111,23 +111,28 @@
         <li>100% Satisfaction Guaranteed</li>
       </ul>
 
-      <div class="hero__cta reveal" data-delay="3">
-        <a class="btn btn--cyan btn--lg btn--ico" href="tel:+18456507548" data-site-tel>
-          Get Pricing
-          <i class="btn__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h14M13 6l6 6-6 6"/></svg></i>
-        </a>
-        <a class="btn btn--phone btn--lg btn--ico" href="tel:+18456507548" data-site-tel>
-          <span data-site="phone">(845) 650 7548</span>
-          <i class="btn__ico btn__ico--grey"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1Z" fill="currentColor" stroke="none"/></svg></i>
-        </a>
-      </div>
-
       <p class="hero__offer reveal" data-delay="3">
         <b data-site="discountAmount">$25 OFF</b>
         <span data-site="discountText">Any House Wash</span>
-        <a href="#discount">Claim it →</a>
+        <button type="button" data-deal-open>Claim it →</button>
       </p>
     </div>
+
+    <!-- Where the reference site puts its quote form, we put the call card. -->
+    <aside class="quotecard reveal" data-delay="1">
+      <h2>Get A Free Quote</h2>
+      <p class="quotecard__sub">It takes only 5 seconds — one call, no forms to fill out.</p>
+      <a class="btn btn--cyan btn--block btn--ico quotecard__btn" href="tel:+18456507548" data-site-tel>
+        <span data-site="phone">(845) 650 7548</span>
+        <i class="btn__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1Z" fill="currentColor" stroke="none"/></svg></i>
+      </a>
+      <ul class="quotecard__list">
+        <li>Free, no-obligation estimate</li>
+        <li>A straight answer on price</li>
+        <li>Usually booked within the week</li>
+      </ul>
+      <p class="quotecard__hours">Mon–Sat · 8am–6pm</p>
+    </aside>
   </div>
 
   <div class="wave wave--hero" aria-hidden="true">
@@ -319,6 +324,7 @@
 
 <!-- ══════════════════════════ BEFORE / AFTER ══════════════════════════ -->
 <section class="sec results" id="results">
+  <div class="bubbles" aria-hidden="true"></div>
   <div class="wrap">
     <header class="sechead reveal">
       <h2>Results That Speak For Themselves</h2>
@@ -326,77 +332,6 @@
         to see the difference.</p>
     </header>
     <div class="grid grid--ba" id="baGrid"><!-- built by main.js --></div>
-  </div>
-</section>
-
-<!-- ══════════════════════════ SCRATCH-OFF DISCOUNT ══════════════════════════
-     Drag across the grimy panel to "wash" it clean and uncover the code.
-     Works with mouse, finger and trackpad; there's a Reveal button for
-     keyboard users and anyone on reduced motion.
-     ═══════════════════════════════════════════════════════════════════════ -->
-<section class="sec discount" id="discount">
-  <div class="bubbles" aria-hidden="true"></div>
-  <div class="wrap">
-    <header class="sechead reveal">
-      <p class="kicker kicker--center kicker--light">Limited Time Offer</p>
-      <h2>Wash The Wall, <span class="cy">Claim Your Discount</span></h2>
-      <p class="lede">Drag across the algae below — just like we would — and see what's
-        hiding underneath.</p>
-    </header>
-
-    <div class="scratch reveal" id="scratch">
-      <div class="scratch__stage">
-        <!-- what's underneath: your video, with the code over the top -->
-        <div class="scratch__under">
-          <video class="scratch__video" id="scratchVideo"
-                 autoplay muted loop playsinline preload="metadata"
-                 poster="assets/img/discount-clean.jpg">
-            <source src="assets/video/clean.webm" type="video/webm">
-            <source src="assets/video/clean.mp4" type="video/mp4">
-          </video>
-          <div class="scratch__shade"></div>
-        </div>
-
-        <!-- the grime layer you scrub away -->
-        <canvas class="scratch__canvas" id="scratchCanvas"></canvas>
-
-        <div class="scratch__hint" id="scratchHint">
-          <span class="scratch__hand">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V11m0-1.5a1.5 1.5 0 0 1 3 0V12m0-1a1.5 1.5 0 0 1 3 0v4.5a5.5 5.5 0 0 1-5.5 5.5H11a5 5 0 0 1-4.4-2.6L4 14.5a1.6 1.6 0 0 1 2.6-1.8L9 15"/></svg>
-          </span>
-          Drag to wash
-        </div>
-      </div>
-
-      <div class="scratch__foot">
-        <div class="scratch__meter" role="progressbar" aria-label="Wall cleaned" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="scratchMeter">
-          <i></i>
-        </div>
-        <button class="btn btn--outline scratch__skip" id="scratchReveal" type="button">Reveal it for me</button>
-      </div>
-
-      <!-- the offer itself, in the same red as the video, with a live call link -->
-      <div class="offer" id="offer" aria-live="polite">
-        <p class="offer__amount"><span data-site="discountAmount">$25 OFF</span></p>
-        <p class="offer__what" data-site="discountText">Any House Wash</p>
-        <a class="offer__call" href="tel:+18456507548" data-site-tel>
-          <span class="offer__callIco">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1Z"/></svg>
-          </span>
-          <span class="offer__callTxt">
-            <b>Call Today</b>
-            <em data-site="phone">(845) 650 7548</em>
-          </span>
-        </a>
-      </div>
-    </div>
-
-    <div class="sec__foot reveal">
-      <a class="btn btn--cyan btn--lg btn--ico" href="tel:+18456507548" data-site-tel>
-        Claim It On The Phone
-        <i class="btn__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h14M13 6l6 6-6 6"/></svg></i>
-      </a>
-    </div>
   </div>
 </section>
 
@@ -518,6 +453,67 @@
     <p>Licensed &amp; insured · Free estimates</p>
   </div>
 </footer>
+
+<!-- ══════════════════════════ DEAL POPUP ══════════════════════════
+     Opened from the "Deal" tab in the header. Drag across the algae to
+     wash it off and uncover the offer. <dialog> gives us focus trapping,
+     Esc-to-close and the backdrop for free.
+     ═══════════════════════════════════════════════════════════════════ -->
+<dialog class="deal" id="dealModal" aria-labelledby="dealTitle">
+  <div class="deal__box">
+    <button class="deal__close" type="button" data-deal-close aria-label="Close">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+
+    <p class="deal__kicker">Limited Time Offer</p>
+    <h2 class="deal__title" id="dealTitle">Wash The Wall</h2>
+    <p class="deal__sub">Drag across the algae to clean it off — just like we would.</p>
+
+    <div class="scratch" id="scratch">
+      <div class="scratch__stage">
+        <div class="scratch__under">
+          <video class="scratch__video" id="scratchVideo"
+                 muted loop playsinline preload="metadata"
+                 poster="assets/img/discount-clean.jpg">
+            <source src="assets/video/clean.webm" type="video/webm">
+            <source src="assets/video/clean.mp4" type="video/mp4">
+          </video>
+          <div class="scratch__shade"></div>
+        </div>
+
+        <canvas class="scratch__canvas" id="scratchCanvas"></canvas>
+
+        <div class="scratch__hint" id="scratchHint">
+          <span class="scratch__hand">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V11m0-1.5a1.5 1.5 0 0 1 3 0V12m0-1a1.5 1.5 0 0 1 3 0v4.5a5.5 5.5 0 0 1-5.5 5.5H11a5 5 0 0 1-4.4-2.6L4 14.5a1.6 1.6 0 0 1 2.6-1.8L9 15"/></svg>
+          </span>
+          Drag to wash
+        </div>
+      </div>
+
+      <div class="scratch__foot">
+        <div class="scratch__meter" role="progressbar" aria-label="Wall cleaned" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="scratchMeter">
+          <i></i>
+        </div>
+        <button class="scratch__skip" id="scratchReveal" type="button">Reveal it for me</button>
+      </div>
+
+      <div class="offer" id="offer" aria-live="polite">
+        <p class="offer__amount"><span data-site="discountAmount">$25 OFF</span></p>
+        <p class="offer__what" data-site="discountText">Any House Wash</p>
+        <a class="offer__call" href="tel:+18456507548" data-site-tel>
+          <span class="offer__callIco">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1Z"/></svg>
+          </span>
+          <span class="offer__callTxt">
+            <b>Call Today</b>
+            <em data-site="phone">(845) 650 7548</em>
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+</dialog>
 
 <a class="callbar" href="tel:+18456507548" data-site-tel>
   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1Z"/></svg>

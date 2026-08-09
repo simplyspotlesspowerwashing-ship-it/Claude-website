@@ -478,15 +478,54 @@ function initScratch() {
 
   if (revealBtn) revealBtn.addEventListener('click', finish);
 
-  paintGrime();
   let rt;
   addEventListener('resize', () => {
     clearTimeout(rt);
     rt = setTimeout(() => { if (!done) paintGrime(); }, 200);
   });
 
+  // The panel lives inside a <dialog>, so it has no size until it opens —
+  // the grime has to be painted then, not at load.
+  scratchRepaint = () => { if (!done) paintGrime(); };
+
   // anyone who asked for reduced motion just gets the prize
   if (reduced) finish();
+}
+
+/* ── Deal popup ───────────────────────────────────────────────────── */
+let scratchRepaint = null;
+
+function initDeal() {
+  const modal = $('#dealModal');
+  if (!modal) return;
+
+  const open = () => {
+    if (typeof modal.showModal === 'function') modal.showModal();
+    else modal.setAttribute('open', '');
+    document.body.classList.add('is-locked');
+    // size and paint the canvas now that the dialog has real dimensions
+    requestAnimationFrame(() => { if (scratchRepaint) scratchRepaint(); });
+    const v = $('#scratchVideo');
+    if (v) { const p = v.play?.(); if (p && p.catch) p.catch(() => {}); }
+  };
+  const close = () => {
+    if (typeof modal.close === 'function') modal.close();
+    else modal.removeAttribute('open');
+    document.body.classList.remove('is-locked');
+    const v = $('#scratchVideo');
+    if (v) v.pause?.();
+  };
+
+  $$('[data-deal-open]').forEach(b => b.addEventListener('click', e => {
+    e.preventDefault();
+    document.body.classList.remove('menu-open');   // in case it opened from the mobile menu
+    open();
+  }));
+  $$('[data-deal-close]').forEach(b => b.addEventListener('click', close));
+
+  // click the backdrop to dismiss
+  modal.addEventListener('click', e => { if (e.target === modal) close(); });
+  modal.addEventListener('close', () => document.body.classList.remove('is-locked'));
 }
 
 /* ── Ambient bubbles in the dark bands ────────────────────────────── */
@@ -652,6 +691,7 @@ guardAll();
 initBubbles();
 initSplitHeadings();  // before initReveal, so word wrapping happens once
 initScratch();
+initDeal();           // after initScratch, so the repaint hook exists
 initReveal();
 initHeader();
 initMenu();

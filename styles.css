@@ -118,17 +118,22 @@ body.loaded .loader{opacity:0;visibility:hidden}
 }
 .btn:hover::after{transform:translateX(130%)}
 
-/* the Discount nav link gets a quiet pulse so people notice it */
-.nav__hot{position:relative}
-.nav__hot::before{
-  content:"";position:absolute;left:-.7rem;top:50%;translate:0 -50%;
-  width:7px;height:7px;border-radius:50%;background:var(--cyan);
-  animation:ping 2.2s ease-out infinite;
+/* the "Deal" tab — the one place red appears outside the popup */
+.nav__deal{
+  border:0;cursor:pointer;font-family:var(--font);position:relative;
+  background:var(--red);color:#fff;border-radius:var(--r-pill);
+  padding:.42rem 1rem;font-size:.86rem;font-weight:900;letter-spacing:.08em;
+  text-transform:uppercase;transition:background .25s,transform .25s var(--ease);
+}
+.nav__deal:hover{background:var(--red-d);transform:translateY(-1px)}
+.nav__deal::after{
+  content:"";position:absolute;inset:0;border-radius:inherit;
+  animation:ping 2.6s ease-out infinite;
 }
 @keyframes ping{
-  0%{box-shadow:0 0 0 0 rgba(25,201,250,.7)}
-  70%{box-shadow:0 0 0 9px rgba(25,201,250,0)}
-  100%{box-shadow:0 0 0 0 rgba(25,201,250,0)}
+  0%{box-shadow:0 0 0 0 rgba(214,31,38,.6)}
+  70%{box-shadow:0 0 0 10px rgba(214,31,38,0)}
+  100%{box-shadow:0 0 0 0 rgba(214,31,38,0)}
 }
 .btn--cyan{background:var(--cyan);color:var(--deep);box-shadow:0 6px 18px -6px rgba(25,201,250,.75)}
 .btn--cyan:hover{background:var(--cyan-l);box-shadow:0 12px 26px -8px rgba(25,201,250,.85)}
@@ -234,10 +239,8 @@ body.menu-open .burger span:nth-child(3){top:18px;transform:rotate(-45deg)}
     linear-gradient(100deg,rgba(4,26,39,.93) 0%,rgba(5,32,47,.86) 34%,rgba(7,42,62,.55) 62%,rgba(7,42,62,.28) 100%),
     linear-gradient(180deg,rgba(4,26,39,.55) 0%,transparent 26%,transparent 66%,rgba(4,26,39,.6) 100%);
 }
-/* single column so the artwork on the right stays unobstructed.
-   The width limit goes on the copy, not on .wrap — .wrap has auto side
-   margins, so capping it there would centre the block instead. */
-.hero__grid{display:block;padding:9rem 0 8rem}
+/* copy left, call card right — the same split the reference site uses */
+.hero__grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(320px,.75fr);gap:clamp(2rem,5vw,4rem);align-items:center;padding:9rem 0 8rem}
 .hero__copy{max-width:660px}
 .hero__eyebrow{
   font-style:italic;font-weight:500;font-size:clamp(1rem,1.6vw,1.2rem);
@@ -261,6 +264,25 @@ body.menu-open .burger span:nth-child(3){top:18px;transform:rotate(-45deg)}
 
 .hero__cta{display:flex;flex-wrap:wrap;gap:.9rem;margin-top:2.2rem}
 
+/* Call card where the reference site has its quote form */
+.quotecard{
+  background:var(--ice);border-radius:var(--r-card);padding:2rem 1.8rem;box-shadow:var(--sh-lg);
+}
+.quotecard h2{font-size:clamp(1.5rem,2.2vw,1.95rem);margin-bottom:.35rem;color:var(--deep)}
+.quotecard__sub{font-size:.94rem;margin-bottom:1.3rem;color:var(--body)}
+.quotecard__btn{font-size:1.05rem}
+.quotecard__list{margin:1.4rem 0 0;display:grid;gap:.6rem}
+.quotecard__list li{position:relative;padding-left:1.7rem;font-size:.93rem;color:var(--ink)}
+.quotecard__list li::before{
+  content:"";position:absolute;left:0;top:.42em;width:1.05rem;height:1.05rem;border-radius:50%;
+  background:var(--cyan);
+}
+.quotecard__list li::after{
+  content:"";position:absolute;left:.35rem;top:.62em;width:.32rem;height:.58rem;
+  border:2px solid var(--deep);border-top:0;border-left:0;rotate:42deg;
+}
+.quotecard__hours{margin:1.3rem 0 0;font-size:.83rem;text-align:center;color:var(--body)}
+
 /* the offer flagged right up front, in the video's red */
 .hero__offer{
   display:inline-flex;align-items:center;gap:.7rem;flex-wrap:wrap;margin:1.8rem 0 0;
@@ -272,8 +294,12 @@ body.menu-open .burger span:nth-child(3){top:18px;transform:rotate(-45deg)}
   font-weight:900;font-style:italic;letter-spacing:.01em;
 }
 .hero__offer span{color:var(--ink);font-weight:700;text-transform:uppercase;font-size:.88rem;letter-spacing:.03em}
-.hero__offer a{color:var(--deep);font-weight:900;text-decoration:none;white-space:nowrap;transition:color .25s}
-.hero__offer a:hover{color:var(--red)}
+.hero__offer button{
+  border:0;background:none;cursor:pointer;font-family:var(--font);
+  color:var(--deep);font-weight:900;font-size:.92rem;white-space:nowrap;
+  transition:color .25s;padding:0;
+}
+.hero__offer button:hover{color:var(--red)}
 
 /* ── Service icon strip ─────────────────────────────────── */
 .strip{background:var(--ice);padding:clamp(2.5rem,5vw,4rem) 0 clamp(2rem,4vw,3rem)}
@@ -458,55 +484,41 @@ section[id],main[id]{scroll-margin-top:96px}
 .ba figcaption b{display:block;font-weight:900;text-transform:uppercase;font-size:1rem;color:#fff}
 .ba figcaption span{font-size:.88rem;color:rgba(255,255,255,.6)}
 
-/* ── Scratch-off discount ───────────────────────────────── */
-.discount{background:linear-gradient(170deg,var(--deep-2),var(--deep));color:rgba(255,255,255,.78);position:relative;overflow:hidden}
-.discount h2{color:#fff}
-.kicker--light{color:var(--cyan-l)}
-.scratch{max-width:920px;margin-inline:auto}
+/* ── Deal popup (opened from the header "Deal" tab) ─────── */
+.deal{
+  border:0;padding:0;background:transparent;max-width:min(560px,calc(100vw - 2rem));
+  width:100%;color:rgba(255,255,255,.8);overflow:visible;
+}
+.deal::backdrop{background:rgba(4,22,34,.72);backdrop-filter:blur(6px)}
+.deal[open]{animation:dealIn .4s var(--ease)}
+@keyframes dealIn{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
+.deal__box{
+  position:relative;background:linear-gradient(170deg,var(--deep-2),var(--deep));
+  border-radius:16px;padding:1.9rem 1.6rem 1.7rem;
+  box-shadow:0 30px 70px -20px rgba(0,0,0,.6);
+  border:1px solid rgba(255,255,255,.1);
+}
+.deal__close{
+  position:absolute;top:.85rem;right:.85rem;width:36px;height:36px;border-radius:50%;
+  border:0;background:rgba(255,255,255,.1);color:#fff;cursor:pointer;display:grid;place-items:center;
+  transition:background .25s;
+}
+.deal__close:hover{background:rgba(255,255,255,.22)}
+.deal__close svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round}
+.deal__kicker{margin:0 0 .5rem;font-size:.74rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan-l)}
+.deal__title{margin:0 0 .3rem;color:#fff;font-size:clamp(1.5rem,4vw,2rem)}
+.deal__sub{margin:0 0 1.2rem;font-size:.93rem;color:rgba(255,255,255,.72)}
+
 .scratch__stage{
-  position:relative;aspect-ratio:16/9;border-radius:var(--r-card);overflow:hidden;
-  box-shadow:var(--sh-lg),0 0 0 1px rgba(255,255,255,.12);background:var(--deep-3);
+  position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;
+  box-shadow:0 0 0 1px rgba(255,255,255,.12);background:var(--deep-3);
 }
 /* the still sits behind the video, so the panel is never an empty box while the
    video buffers, if autoplay is blocked, or if the file is missing entirely */
 .scratch__under{position:absolute;inset:0;background:#0A3A54 url("assets/img/discount-clean.jpg") center/cover no-repeat}
 .scratch__video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-/* just a vignette — the video underneath should read clearly */
-.scratch__shade{position:absolute;inset:0;background:radial-gradient(120% 100% at 50% 45%,transparent 55%,rgba(5,32,47,.35))}
-/* no video file yet? fall back to a clean gradient so it still looks deliberate */
+.scratch__shade{position:absolute;inset:0;background:radial-gradient(120% 100% at 50% 45%,transparent 58%,rgba(5,32,47,.3))}
 .scratch.no-video .scratch__video{display:none}
-.scratch.no-video .scratch__shade{background:linear-gradient(135deg,#0A3A54,#19C9FA)}
-
-/* the offer, in the same red as the video, revealed with the wall */
-.offer{
-  margin-top:1.5rem;background:#fff;border-radius:var(--r-card);box-shadow:var(--sh-lg);
-  padding:1.6rem 1.8rem;display:flex;align-items:center;justify-content:center;
-  gap:clamp(1rem,3vw,2.4rem);flex-wrap:wrap;text-align:center;
-  opacity:0;transform:translateY(18px) scale(.97);
-  transition:opacity .6s var(--ease),transform .6s var(--ease);
-}
-.scratch.done .offer{opacity:1;transform:none}
-.offer__amount{
-  margin:0;font-weight:900;font-style:italic;color:var(--red);line-height:.95;
-  font-size:clamp(2.6rem,7vw,4.6rem);letter-spacing:-.02em;
-  text-shadow:2px 3px 0 rgba(0,0,0,.16);
-}
-.offer__what{
-  margin:0;font-weight:900;text-transform:uppercase;color:var(--red);
-  font-size:clamp(1.1rem,2.6vw,1.8rem);line-height:1.1;letter-spacing:.01em;
-}
-.offer__call{
-  display:inline-flex;align-items:center;gap:.9rem;text-decoration:none;
-  background:var(--red);color:#fff;border-radius:var(--r-pill);
-  padding:.85rem 1.7rem .85rem .9rem;box-shadow:0 12px 28px -10px rgba(214,31,38,.85);
-  transition:transform .3s var(--ease),box-shadow .3s var(--ease),background .25s;
-}
-.offer__call:hover{transform:translateY(-3px);background:var(--red-d);box-shadow:0 18px 36px -12px rgba(214,31,38,.95)}
-.offer__callIco{width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.2);display:grid;place-items:center;flex:none}
-.offer__callIco svg{width:22px;height:22px;fill:#fff}
-.offer__callTxt{display:flex;flex-direction:column;line-height:1.15;text-align:left}
-.offer__callTxt b{font-weight:900;text-transform:uppercase;letter-spacing:.06em;font-size:.86rem}
-.offer__callTxt em{font-style:normal;font-weight:900;font-size:1.22rem}
 
 .scratch__canvas{position:absolute;inset:0;width:100%;height:100%;cursor:grab;touch-action:none;transition:opacity .7s var(--ease)}
 .scratch__canvas:active{cursor:grabbing}
@@ -514,37 +526,72 @@ section[id],main[id]{scroll-margin-top:96px}
 
 .scratch__hint{
   position:absolute;left:50%;top:50%;translate:-50% -50%;pointer-events:none;
-  display:grid;justify-items:center;gap:.5rem;color:#fff;font-weight:700;
-  letter-spacing:.14em;text-transform:uppercase;font-size:.82rem;
+  display:grid;justify-items:center;gap:.4rem;color:#fff;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;font-size:.74rem;
   text-shadow:0 2px 12px rgba(0,0,0,.6);transition:opacity .4s;
 }
-.scratch__hand{display:grid;place-items:center;width:52px;height:52px}
-.scratch__hand svg{width:38px;height:38px;fill:none;stroke:#fff;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
-.scratch__hand{animation:wipe 2.4s var(--ease) infinite}
-@keyframes wipe{0%,100%{transform:translateX(-26px) rotate(-8deg)}50%{transform:translateX(26px) rotate(8deg)}}
-.scratch.started .scratch__hint{opacity:0}
+.scratch__hand{display:grid;place-items:center;width:46px;height:46px;animation:wipe 2.4s var(--ease) infinite}
+.scratch__hand svg{width:34px;height:34px;fill:none;stroke:#fff;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+@keyframes wipe{0%,100%{transform:translateX(-24px) rotate(-8deg)}50%{transform:translateX(24px) rotate(8deg)}}
+.scratch.started .scratch__hint,.scratch.done .scratch__hint{opacity:0}
 
-.scratch__foot{display:flex;align-items:center;gap:1.2rem;margin-top:1.3rem;flex-wrap:wrap}
-.scratch__meter{flex:1;min-width:180px;height:8px;border-radius:8px;background:rgba(255,255,255,.14);overflow:hidden}
-.scratch__meter i{display:block;height:100%;width:0;border-radius:8px;background:linear-gradient(90deg,var(--cyan),var(--cyan-l));transition:width .25s var(--ease)}
-.scratch__skip{padding:.7rem 1.4rem;font-size:.82rem}
-.scratch.done .scratch__skip{opacity:.35;pointer-events:none}
+.scratch__foot{display:flex;align-items:center;gap:1rem;margin-top:1rem}
+.scratch__meter{flex:1;height:6px;border-radius:6px;background:rgba(255,255,255,.14);overflow:hidden}
+.scratch__meter i{display:block;height:100%;width:0;border-radius:6px;background:var(--cyan);transition:width .25s var(--ease)}
+.scratch__skip{
+  border:1px solid rgba(255,255,255,.35);background:transparent;color:#fff;cursor:pointer;
+  border-radius:var(--r-pill);padding:.45rem 1rem;font-family:var(--font);
+  font-size:.74rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  transition:background .25s,opacity .3s;
+}
+.scratch__skip:hover{background:rgba(255,255,255,.14)}
+.scratch.done .scratch__skip{opacity:.3;pointer-events:none}
+
+/* the offer itself, in the same red as the video */
+/* kept out of the flow until revealed, so the popup isn't padded with dead space */
+.offer{display:none}
+.scratch.done .offer{
+  margin-top:1.1rem;background:#fff;border-radius:12px;padding:1.2rem 1.3rem;
+  display:grid;justify-items:center;gap:.2rem;text-align:center;
+  animation:offerIn .55s var(--ease);
+}
+@keyframes offerIn{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
+.offer__amount{
+  margin:0;font-weight:900;font-style:italic;color:var(--red);line-height:.95;
+  font-size:clamp(2.3rem,9vw,3.4rem);letter-spacing:-.03em;
+}
+.offer__what{
+  margin:0 0 .8rem;font-weight:900;text-transform:uppercase;color:var(--red);
+  font-size:clamp(1rem,3.4vw,1.35rem);line-height:1.1;
+}
+.offer__call{
+  display:inline-flex;align-items:center;gap:.8rem;text-decoration:none;
+  background:var(--red);color:#fff;border-radius:var(--r-pill);
+  padding:.7rem 1.5rem .7rem .75rem;box-shadow:0 10px 24px -10px rgba(214,31,38,.8);
+  transition:transform .3s var(--ease),background .25s;
+}
+.offer__call:hover{transform:translateY(-2px);background:var(--red-d)}
+.offer__callIco{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.2);display:grid;place-items:center;flex:none}
+.offer__callIco svg{width:19px;height:19px;fill:#fff}
+.offer__callTxt{display:flex;flex-direction:column;line-height:1.15;text-align:left}
+.offer__callTxt b{font-weight:900;text-transform:uppercase;letter-spacing:.06em;font-size:.76rem}
+.offer__callTxt em{font-style:normal;font-weight:900;font-size:1.1rem}
 
 /* ── Ambient bubbles for dark bands ─────────────────────── */
 .bubbles{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
 .bubbles span{
   position:absolute;bottom:-12%;border-radius:50%;
-  background:radial-gradient(circle at 32% 30%,rgba(255,255,255,.5),rgba(127,224,255,.16) 60%,transparent 70%);
-  border:1px solid rgba(255,255,255,.14);
+  background:radial-gradient(circle at 32% 30%,rgba(255,255,255,.4),rgba(127,224,255,.12) 60%,transparent 70%);
+  border:1px solid rgba(255,255,255,.1);
   animation:rise linear infinite;
 }
 @keyframes rise{
   0%{transform:translateY(0) translateX(0) scale(.7);opacity:0}
-  10%{opacity:.7}
-  90%{opacity:.5}
+  10%{opacity:.55}
+  90%{opacity:.4}
   100%{transform:translateY(-118vh) translateX(var(--drift,20px)) scale(1.1);opacity:0}
 }
-.discount .wrap,.results .wrap,.why .wrap{position:relative;z-index:1}
+.results .wrap,.why .wrap{position:relative;z-index:1}
 
 /* ── CTA band with photo ────────────────────────────────── */
 .cta{position:relative;padding:clamp(4.5rem,8vw,7rem) 0;text-align:center;overflow:hidden;isolation:isolate}
