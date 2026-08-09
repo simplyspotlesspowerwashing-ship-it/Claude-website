@@ -7,10 +7,10 @@
    ║     updates (header, hero, FAQ, CTA, footer, mobile call bar).     ║
    ╚═══════════════════════════════════════════════════════════════════╝ */
 const SITE = {
-  phone: '(555) 123-4567',                              // <-- REPLACE with your real number
-  phoneRaw: '+15551234567',                             // <-- same number, digits only, with +1
+  phone: '(845) 650 7548',                              // <-- REPLACE with your real number
+  phoneRaw: '+18456507548',                             // <-- same number, digits only, with +1
   email: 'simply.spotless.powerwashing@gmail.com',
-  area: 'the surrounding area'                          // <-- e.g. 'Tampa & Hillsborough County'
+  area: 'Pearl river'                          // <-- e.g. 'Tampa & Hillsborough County'
 };
 
 /* ╔═══════════════════════════════════════════════════════════════════╗
@@ -39,23 +39,15 @@ const PROJECTS = [
    ╚═══════════════════════════════════════════════════════════════════╝ */
 const SERVICES = [
   { t:'House Washing', tag:'Most booked', ico:'house',
-    d:'A low-pressure soft wash that strips algae, mildew and spider webs off vinyl, stucco, brick and painted wood — without forcing water behind the siding.' },
-  { t:'Roof Soft Washing', ico:'roof',
-    d:'Those black streaks are living algae, not dirt. We kill it at the root with a no-pressure treatment that is safe for asphalt shingles and your warranty.' },
-  { t:'Driveways &amp; Concrete', ico:'drive',
-    d:'Surface-cleaner passes that leave an even finish with no wand stripes, plus a post-treatment so the grime takes far longer to come back.' },
-  { t:'Decks &amp; Fences', ico:'deck',
+    d:'A low-pressure soft wash that strips algae, mildew and spider webs off vinyl — without forcing water behind the siding.' },
+  { t:'Driveways & Concrete', ico:'drive',
+    d:'Surface-cleaner passes that leave an even finish getting all that grime off' },
+  { t:'Decks & Fences', ico:'deck',
     d:'Careful pressure tuned to the species of wood or composite, bringing back the original colour and prepping the surface if you plan to stain.' },
-  { t:'Gutter Brightening', ico:'gutter',
-    d:'The vertical tiger stripes on aluminium gutters need a specific detergent to release. We clean the face until it matches the trim again.' },
-  { t:'Paver Restoration', ico:'paver',
-    d:'Deep clean, weed and moss removal, fresh polymeric joint sand and optional sealing to lock the colour in for years.' },
-  { t:'Patios &amp; Pool Decks', ico:'pool',
+  { t:'Gutter Cleaning', ico:'gutter',
+    d:'Backed up gutters causing drainage issues Let me clean them out. Allowing you clean gutters without the hassle of getting up on the roof!' },
+  { t:'Patios & Pool Decks', ico:'pool',
     d:'Slick, discoloured pool surrounds cleaned back to a safe, even, non-slippery finish before the season starts.' },
-  { t:'Storefronts &amp; Walkways', tag:'Commercial', ico:'shop',
-    d:'Early-morning or after-hours service so your entrance, sidewalk and dumpster pad are spotless before the first customer arrives.' },
-  { t:'Fleet &amp; Equipment', tag:'Commercial', ico:'truck',
-    d:'Trucks, trailers and heavy equipment washed on your lot on a schedule that keeps the whole fleet looking maintained.' }
 ];
 
 const ICONS = {
