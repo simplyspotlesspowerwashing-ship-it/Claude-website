@@ -41,6 +41,7 @@ through them.
 | `hero.jpg` | full-screen image behind the headline | wide, 2000×1200 or larger |
 | `why.jpg` | the round photo in the intro section | square, it gets circle-cropped |
 | `cta.jpg` | background of the bottom call band | wide |
+| `discount-clean.jpg` | still behind the scratch-off panel | 16:9 |
 | `svc-house.jpg`, `svc-driveway.jpg`, `svc-deck.jpg`, `svc-gutter.jpg`, `svc-patio.jpg` | tops of the five service cards | 16:10 landscape |
 | `ba-1-before.jpg` / `ba-1-after.jpg` | first before/after slider | 4:3 |
 | `ba-2-before.jpg` / `ba-2-after.jpg` | second slider | 4:3 |
@@ -68,6 +69,17 @@ const PROJECTS = [
 
 The services grid works the same way — see the `SERVICES` list just below it.
 
+### Where the current artwork came from
+
+`hero.jpg`, `why.jpg`, `cta.jpg` and `discount-clean.jpg` are stills cut from
+your own animation (`assets/video/clean.mp4`), so the site is branded and
+consistent out of the box. Replace any of them with real job photos whenever
+you have them — the filenames are all that matter.
+
+The before/after sliders are deliberately still on neutral placeholders. That
+section says the results are straight off the truck, so it should only ever
+hold real photographs of real jobs, not frames from the animation.
+
 ## 3. The scratch-off discount
 
 The "Claim Your Discount" section hides a code behind a layer of grime that
@@ -76,11 +88,12 @@ half cleaned it finishes the job for them and shows the code, which they can
 click to copy. There's a **Reveal it for me** button for keyboard users, and
 anyone browsing with reduced motion turned on skips straight to the code.
 
-Change the offer in `main.js`:
+Change the offer in `main.js` — it updates the hero badge and the offer card
+together:
 
 ```js
-discountText: '10% Off Your First Wash',
-discountCode: 'SPOTLESS10'
+discountAmount: '$25 OFF',
+discountText:   'Any House Wash'
 ```
 
 **The video behind it** lives at `assets/video/clean.mp4`. Swap that file to

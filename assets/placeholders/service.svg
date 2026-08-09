@@ -1,24 +1,39 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Placeholder service photo">
   <defs>
-    <linearGradient id="sBg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#0A3A54"/><stop offset="1" stop-color="#19C9FA"/>
+    <linearGradient id="sSky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3FB8F0"/><stop offset="1" stop-color="#A8E2F8"/>
     </linearGradient>
-    <linearGradient id="sSpray" x1="0" y1="1" x2="1" y2="0">
-      <stop offset="0" stop-color="#ffffff" stop-opacity="0"/>
-      <stop offset="1" stop-color="#ffffff" stop-opacity=".55"/>
+    <linearGradient id="sWall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F2EFE6"/><stop offset="1" stop-color="#D9D5C7"/>
     </linearGradient>
-    <filter id="sBlur"><feGaussianBlur stdDeviation="16"/></filter>
   </defs>
-  <rect width="800" height="500" fill="url(#sBg)"/>
-  <g stroke="#ffffff" stroke-width="3" opacity=".14">
-    <path d="M0 90h800M0 180h800M0 270h800M0 360h800M0 450h800"/>
+
+  <!-- sky -->
+  <rect width="800" height="500" fill="url(#sSky)"/>
+  <g fill="#ffffff" opacity=".85">
+    <ellipse cx="120" cy="82" rx="72" ry="30"/><ellipse cx="176" cy="70" rx="48" ry="26"/>
+    <ellipse cx="640" cy="60" rx="60" ry="24"/><ellipse cx="690" cy="52" rx="40" ry="20"/>
   </g>
-  <path d="M120 500c-20-170 70-300 260-360" stroke="url(#sSpray)" stroke-width="120"
-        fill="none" stroke-linecap="round" opacity=".45" filter="url(#sBlur)"/>
-  <g fill="#ffffff" opacity=".5">
-    <circle cx="470" cy="150" r="9"/><circle cx="530" cy="110" r="6"/><circle cx="430" cy="210" r="5"/>
-    <circle cx="590" cy="170" r="7"/><circle cx="640" cy="120" r="4"/>
+
+  <!-- house wall with siding -->
+  <path d="M150 120h620v300H150z" fill="url(#sWall)"/>
+  <g stroke="#C7C2B2" stroke-width="3">
+    <path d="M150 155h620M150 190h620M150 225h620M150 260h620M150 295h620M150 330h620M150 365h620M150 400h620"/>
   </g>
-  <text x="400" y="465" font-family="system-ui,sans-serif" font-size="20" font-weight="700"
-        fill="#ffffff" fill-opacity=".75" text-anchor="middle" letter-spacing="3">ADD YOUR PHOTO</text>
+  <path d="M120 120 460 40l340 80z" fill="#5C6670"/>
+  <rect x="200" y="200" width="110" height="100" rx="4" fill="#9FD9F2" stroke="#fff" stroke-width="6"/>
+
+  <!-- grass -->
+  <path d="M0 420h800v80H0z" fill="#6DBE45"/>
+  <path d="M0 420c120 18 260-14 400 2s280 20 400-6v84H0z" fill="#5AA838" opacity=".55"/>
+
+  <!-- water spray -->
+  <g opacity=".85">
+    <path d="M690 330c-60 18-120 8-170-16" stroke="#BEE9FB" stroke-width="16" fill="none" stroke-linecap="round"/>
+    <circle cx="500" cy="308" r="7" fill="#DFF4FD"/><circle cx="540" cy="322" r="5" fill="#DFF4FD"/>
+    <circle cx="470" cy="300" r="4" fill="#DFF4FD"/>
+  </g>
+
+  <text x="400" y="470" font-family="system-ui,sans-serif" font-size="20" font-weight="700"
+        fill="#0A3A54" fill-opacity=".55" text-anchor="middle" letter-spacing="3">ADD YOUR PHOTO</text>
 </svg>

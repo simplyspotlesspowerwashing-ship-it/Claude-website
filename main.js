@@ -21,8 +21,8 @@ const SITE = {
   reviewCount: null,                                    // e.g. 47
 
   // The scratch-off discount panel
-  discountText: '10% Off Your First Wash',
-  discountCode: 'SPOTLESS10'
+  discountAmount: '$25 OFF',
+  discountText: 'Any House Wash'
 };
 
 /* ╔═══════════════════════════════════════════════════════════════════╗
@@ -101,7 +101,7 @@ const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>
 function applySiteDetails() {
   const map = {
     phone:SITE.phone, email:SITE.email, area:SITE.area, reviewsLine:SITE.reviewsLine,
-    discountText:SITE.discountText, discountCode:SITE.discountCode
+    discountAmount:SITE.discountAmount, discountText:SITE.discountText
   };
   Object.entries(map).forEach(([k,v]) => {
     if (v == null) return;
@@ -292,7 +292,7 @@ function initScratch() {
   const canvas = $('#scratchCanvas');
   const meter  = $('#scratchMeter');
   const revealBtn = $('#scratchReveal');
-  const codeBtn = $('#scratchCode');
+  const offerCall = $('#offer .offer__call');
   const video  = $('#scratchVideo');
   if (!root || !canvas) return;
 
@@ -323,35 +323,52 @@ function initScratch() {
     ctx.globalCompositeOperation = 'source-over';
     ctx.clearRect(0, 0, w, h);
 
-    // base film of dirt
-    const g = ctx.createLinearGradient(0, 0, w, h);
-    g.addColorStop(0,   '#7c8a86');
-    g.addColorStop(.45, '#98a49a');
-    g.addColorStop(1,   '#6f7d74');
+    // green algae film, matching the artwork in the video
+    const g = ctx.createLinearGradient(0, 0, w * .3, h);
+    g.addColorStop(0,   '#8FA94E');
+    g.addColorStop(.4,  '#7B9A3F');
+    g.addColorStop(.75, '#6B8C36');
+    g.addColorStop(1,   '#5E7F30');
     ctx.fillStyle = g;
     ctx.fillRect(0, 0, w, h);
 
-    // blotches of algae and water spotting
-    for (let i = 0; i < 90; i++) {
+    // darker mildew blooms and lighter patches
+    for (let i = 0; i < 80; i++) {
       const x = Math.random() * w, y = Math.random() * h;
-      const rad = 12 + Math.random() * 70;
+      const rad = 18 + Math.random() * 95;
       const b = ctx.createRadialGradient(x, y, 0, x, y, rad);
-      const dark = Math.random() > .55;
-      b.addColorStop(0, dark ? 'rgba(60,78,52,.5)' : 'rgba(255,255,255,.24)');
-      b.addColorStop(1, 'rgba(255,255,255,0)');
+      const dark = Math.random() > .45;
+      b.addColorStop(0, dark ? 'rgba(58,74,32,.55)' : 'rgba(176,201,110,.5)');
+      b.addColorStop(1, 'rgba(0,0,0,0)');
       ctx.fillStyle = b;
       ctx.beginPath(); ctx.arc(x, y, rad, 0, Math.PI * 2); ctx.fill();
     }
-    // streaks running down the glass
-    ctx.strokeStyle = 'rgba(70,90,70,.16)';
-    for (let i = 0; i < 34; i++) {
+
+    // algae drips running down the siding, like the video
+    for (let i = 0; i < 26; i++) {
       const x = Math.random() * w;
-      ctx.lineWidth = 1 + Math.random() * 5;
+      const len = h * (0.25 + Math.random() * 0.6);
+      const width = 4 + Math.random() * 16;
+      ctx.fillStyle = `rgba(86,116,40,${0.35 + Math.random() * 0.35})`;
       ctx.beginPath();
       ctx.moveTo(x, 0);
-      ctx.bezierCurveTo(x + 14, h * .35, x - 14, h * .7, x + 6, h);
-      ctx.stroke();
+      ctx.quadraticCurveTo(x + width, len * .55, x + width / 2, len);
+      ctx.quadraticCurveTo(x - width / 2, len * .55, x - width, 0);
+      ctx.closePath();
+      ctx.fill();
+      // the bead of slime at the end of the run
+      ctx.beginPath();
+      ctx.arc(x + width / 2, len, width * .55, 0, Math.PI * 2);
+      ctx.fill();
     }
+
+    // faint horizontal siding shadows so it reads as a wall
+    ctx.strokeStyle = 'rgba(40,56,24,.16)';
+    ctx.lineWidth = 2;
+    for (let y = h * .08; y < h; y += h * .11) {
+      ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke();
+    }
+
     ctx.globalCompositeOperation = 'destination-out';
   }
 
@@ -362,7 +379,8 @@ function initScratch() {
   };
 
   function wipe(a, b) {
-    const radius = Math.max(26, Math.min(w, h) * 0.075);
+    // a wide spray pattern — the point is that it clears fast, not that it's fiddly
+    const radius = Math.max(70, Math.min(w, h) * 0.22);
     // destination-out erases in proportion to source alpha, so these must be
     // fully opaque — otherwise the grime only thins instead of clearing.
     ctx.strokeStyle = '#000';
@@ -399,7 +417,7 @@ function initScratch() {
     done = true;
     root.classList.add('done');
     setMeter(1);
-    if (codeBtn) codeBtn.focus({ preventScroll: true });
+    if (offerCall) setTimeout(() => offerCall.focus({ preventScroll: true }), 650);
   }
 
   function setMeter(frac) {
@@ -417,9 +435,9 @@ function initScratch() {
       checkQueued = false;
       if (done) return;
       const frac = cleared();
-      setMeter(frac / 0.55);
-      if (frac >= 0.55) finish();      // enough scrubbed — wipe the rest for them
-    }, 180);
+      setMeter(frac / 0.42);
+      if (frac >= 0.42) finish();      // enough scrubbed — wipe the rest for them
+    }, 140);
   }
 
   const start = e => {
@@ -459,22 +477,6 @@ function initScratch() {
   canvas.addEventListener('mouseleave', () => { last = null; });
 
   if (revealBtn) revealBtn.addEventListener('click', finish);
-
-  if (codeBtn) {
-    codeBtn.addEventListener('click', async () => {
-      const code = codeBtn.querySelector('span').textContent.trim();
-      try {
-        await navigator.clipboard.writeText(code);
-        const original = codeBtn.querySelector('span').textContent;
-        codeBtn.classList.add('copied');
-        codeBtn.querySelector('span').textContent = 'Copied!';
-        setTimeout(() => {
-          codeBtn.classList.remove('copied');
-          codeBtn.querySelector('span').textContent = original;
-        }, 1600);
-      } catch { /* clipboard unavailable — the code is on screen anyway */ }
-    });
-  }
 
   paintGrime();
   let rt;
